@@ -1,8 +1,11 @@
 require 'net/http'
 require 'json'
 
-# Steph's User id: 1367622 
-# Adam's user id: 1164143
+# Steph Sharp: 1367622 
+# Adam Sharp: 1164143
+# David Underwood: 131066
+# Daniel Beauchamp: 208314
+# Edward Ocampo-Gooding: 95705
 user_id = 1367622
 
 # Get all badges for user - /users/{ids}/badges
