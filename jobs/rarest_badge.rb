@@ -6,7 +6,8 @@ require 'json'
 # David Underwood: 131066
 # Daniel Beauchamp: 208314
 # Edward Ocampo-Gooding: 95705
-user_id = 1367622
+# Jeff Atwood: 1
+user_id = 1
 
 # Get all badges for user - /users/{ids}/badges
 SCHEDULER.every '1m', :first_in => 0 do |job|
