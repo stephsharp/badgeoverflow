@@ -18,7 +18,7 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
   badge_ids = user_badges_response['items'].map { |badge| badge['badge_id'] }
   
   if badge_ids.empty?
-    send_event('rarest_badge', { :text => "No badges", :moreinfo => ""})
+    send_event('rarest_badge', { :text => "No badges", :moreinfo => "", :background => badge_colour})
   else
     # Get all badges with ids - /badges/{ids} 
     badges_response = JSON.parse(stack_exchange.get("/2.1/badges/#{badge_ids.join(';')}?site=stackoverflow").body)
@@ -35,5 +35,17 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
   
     # pagesize - what if the user has > 30 badges?
     
+
+# Set background colour of widget to badge rank
+def badge_colour (badge_rank = nil)
+  case badge_rank 
+  when 'bronze'
+    '#BF8753'
+  when 'silver'
+    '#B8B8B8'
+  when 'gold'
+    '#FEC337'
+  else
+    '#808080'
   end
 end
