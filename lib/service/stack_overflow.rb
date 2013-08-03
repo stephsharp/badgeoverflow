@@ -1,0 +1,40 @@
+require 'net/http'
+require 'json'
+
+module Service
+  class StackOverflow
+
+    # Stack Exchange API endpoint
+    ENDPOINT = 'api.stackexchange.com'
+
+    class << self
+
+      # Fetches 1 or more of a given resource.
+      #
+      # When the request completes, the 'items' key of the response is
+      # yielded to the block. If there are multiple results, an array
+      # will be yielded, otherwise just the first element of the
+      # 'items' array.
+      #
+      # Params:
+      # +resource+::
+      #   the stack exchange resource, e.g., "users" or "badges"
+      # +ids+::
+      #   the remaining parameters are interpreted as an array of ids
+      def fetch(resource, *ids) # :yields: item_or_items
+        stack_exchange = Net::HTTP.new(ENDPOINT)
+        response = stack_exchange.get("/2.1/#{resource.to_s}/#{ids.join(';')}?site=stackoverflow")
+        items = JSON.parse(response.body)['items']
+
+        items ||= []
+        if items.length == 1
+          yield items.first
+        else
+          yield items
+        end
+      end
+
+    end
+
+  end
+end
