@@ -7,7 +7,7 @@ require 'json'
 # Daniel Beauchamp: 208314
 # Edward Ocampo-Gooding: 95705
 # Jeff Atwood: 1
-user_id = 1
+user_id = 1367622
 
 # Get all badges for user - /users/{ids}/badges
 SCHEDULER.every '1h', :first_in => 0 do |job|
@@ -58,8 +58,9 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
     end  
 
     # Display badge name with award_count below
+    formatted_award_count = rarest_badge['award_count'].to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
     send_event('rarest_badge', { :text => rarest_badge['name'], 
-                                 :moreinfo => "Awarded #{rarest_badge['award_count']} times",
+                                 :moreinfo => "Awarded #{formatted_award_count} times",
                                  :background => badge_colour(rarest_badge['rank'])
                                 })
   end
