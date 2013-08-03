@@ -4,9 +4,6 @@ require 'json'
 module Service
   class StackOverflow
 
-    # Stack Exchange API endpoint
-    ENDPOINT = 'api.stackexchange.com'
-
     class << self
 
       # Fetches 1 or more of a given resource.
@@ -22,7 +19,6 @@ module Service
       # +ids+::
       #   the remaining parameters are interpreted as an array of ids
       def fetch(resource, *ids) # :yields: item_or_items
-        stack_exchange = Net::HTTP.new(ENDPOINT)
         response = stack_exchange.get("/2.1/#{resource.to_s}/#{ids.join(';')}?site=stackoverflow")
         items = JSON.parse(response.body)['items']
 
@@ -31,6 +27,13 @@ module Service
         else
           yield items.length == 1 ? items.first : items
         end
+      end
+
+      private
+
+      # HTTP client for +api.stackexchange.com+
+      def stack_exchange
+        Net::HTTP.new('api.stackexchange.com')
       end
 
     end
