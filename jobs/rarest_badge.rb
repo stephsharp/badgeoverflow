@@ -10,7 +10,7 @@ require 'json'
 user_id = 1
 
 # Get all badges for user - /users/{ids}/badges
-SCHEDULER.every '1m', :first_in => 0 do |job|
+SCHEDULER.every '1h', :first_in => 0 do |job|
   stack_exchange = Net::HTTP.new('api.stackexchange.com')
   user_badges_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/badges?site=stackoverflow").body)
   
