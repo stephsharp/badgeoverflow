@@ -1,0 +1,14 @@
+require 'service/stack_overflow'
+
+user_id = 1164143
+
+SCHEDULER.every '1m', :first_in => 0 do |job|
+  include Service
+
+  StackOverflow.fetch :users, user_id do |user|
+    send_event 'avatar', {
+      image: user['profile_image'],
+      width: 75
+    }
+  end
+end
