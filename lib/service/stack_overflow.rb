@@ -26,11 +26,10 @@ module Service
         response = stack_exchange.get("/2.1/#{resource.to_s}/#{ids.join(';')}?site=stackoverflow")
         items = JSON.parse(response.body)['items']
 
-        items ||= []
-        if items.length == 1
-          yield items.first
+        if items.nil? or items.length == 0
+          yield nil
         else
-          yield items
+          yield items.length == 1 ? items.first : items
         end
       end
 
