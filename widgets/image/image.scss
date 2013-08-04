@@ -10,4 +10,10 @@ $background-color:  #4b4b4b;
 
   background-color: $background-color;
 
+  img {
+    -webkit-border-radius: 50em;
+    -moz-border-radius: 50em;
+    border-radius: 50em;
+  }
+
 }
