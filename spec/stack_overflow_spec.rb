@@ -17,6 +17,10 @@ describe StackOverflow, '.fetch' do
 
   before { stub_request(:get, endpoint).to_return(:body => body) }
 
+  context "with no block given" do
+    specify { expect { StackOverflow.fetch(resource) }.not_to raise_error }
+  end
+
   describe "requests" do
     context "with :users resource" do
       let(:resource) { :users }
