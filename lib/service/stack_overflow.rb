@@ -23,10 +23,12 @@ module Service
         response = get(resource.to_s, ids)
         items = JSON.parse(response.body)['items']
 
-        if items.nil? or items.length == 0
-          yield nil
-        else
-          yield items.length == 1 ? items.first : items
+        if block_given?
+          if items.nil? or items.length == 0
+            yield nil
+          else
+            yield items.length == 1 ? items.first : items
+          end
         end
       end
 
