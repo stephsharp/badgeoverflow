@@ -1,8 +1,8 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #12b0c5;
-$value-color:       #fff;
+$background-color:  #808080;
+$rank-color:        #fff;
 
 $title-color:       rgba(255, 255, 255, 0.7);
 $label-color:       rgba(255, 255, 255, 0.7);
@@ -42,11 +42,11 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
     color: $label-color;
   }
 
-  .value {
-    float: right;
-    margin-left: 12px;
+  .rank {
+    float: left;
+    margin-right: 20px;
     font-weight: 600;
-    color: $value-color;
+    color: $rank-color;
   }
 
   .updated-at {
