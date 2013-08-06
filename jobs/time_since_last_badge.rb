@@ -41,8 +41,16 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
                                         })
   else
     # Display time since last badge was awarded
-    formatted_creation_date = Time.at(last_badge['creation_date']).to_datetime.strftime("%d/%m/%Y")
-    send_event('time_since_last_badge', { :text => formatted_creation_date,
+    now = Time.now
+    last_badge_creation_date = Time.at(last_badge['creation_date'])
+    seconds_since_last_badge = now - last_badge_creation_date
+
+    mm, ss = seconds_since_last_badge.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(24)
+    time_since_last_badge = "%d D %d H" % [dd, hh]
+
+    send_event('time_since_last_badge', { :text => time_since_last_badge,
                                           :moreinfo => last_badge['detail']
                                         })
   end
