@@ -6,8 +6,14 @@ $background-color:  #4b4b4b;
 // ----------------------------------------------------------------------------
 // Widget-image styles
 // ----------------------------------------------------------------------------
-.widget-image {
+.widget-user {
 
   background-color: $background-color;
+
+  img {
+    -webkit-border-radius: 50em;
+    -moz-border-radius: 50em;
+    border-radius: 50em;
+  }
 
 }

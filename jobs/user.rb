@@ -6,7 +6,7 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
   include Service
 
   StackOverflow.fetch :users, user_id do |user|
-    send_event 'avatar', {
+    send_event 'user', {
       image: user['profile_image'],
       width: 75
     }
