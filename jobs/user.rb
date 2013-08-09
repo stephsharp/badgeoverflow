@@ -1,5 +1,3 @@
-require 'service/stack_overflow'
-
 user_id = 1164143
 
 SCHEDULER.every '1m', :first_in => 0 do |job|

@@ -1,6 +1,3 @@
-# add lib/ to load path
-$: << 'lib'
-
 require 'dashing'
 
 configure do
