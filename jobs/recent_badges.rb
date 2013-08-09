@@ -7,12 +7,12 @@ require 'json'
 # Daniel Beauchamp: 208314
 # Edward Ocampo-Gooding: 95705
 # Jeff Atwood: 1
-user_id = 1
+user_id = 1367622
 
 # Get timeline for user - /users/{ids}/timeline 
 SCHEDULER.every '1h', :first_in => 0 do |job|
   stack_exchange = Net::HTTP.new('api.stackexchange.com')
-  recent_badges = Hash.new({ value: 0 });
+  recent_badges = []
   number_of_badges = 5
   page_number = 1
   
@@ -24,7 +24,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
       if item['timeline_type'] == "badge" && recent_badges.length < number_of_badges
         badge_response = JSON.parse(stack_exchange.get("/2.1/badges/#{item['badge_id']}?site=stackoverflow").body)
         badge_rank = badge_response['items'].first['rank']
-        recent_badges[item['detail']] = { rank: badge_rank, label: item['detail'] }
+        recent_badges << { rank: badge_rank, label: item['detail'] }
       end
     end
   
@@ -45,5 +45,5 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   end
 
   # Display recently awarded badges
-  send_event('recent_badges', { items: recent_badges.values })
+  send_event('recent_badges', { items: recent_badges })
 end
