@@ -35,7 +35,7 @@ module Service
       private
 
       def get(resource, *ids)
-        stack_exchange.request_get("/2.1/#{resource}/#{ids.join(';')}?site=stackoverflow")
+        stack_exchange.get("/2.1/#{resource}/#{ids.join(';')}?site=stackoverflow")
       end
 
       def stack_exchange
