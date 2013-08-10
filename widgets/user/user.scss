@@ -1,7 +1,8 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #fff;
+$background-color: #fff;
+$foreground-color: #808080;
 
 // ----------------------------------------------------------------------------
 // Widget-image styles
@@ -9,16 +10,78 @@ $background-color:  #fff;
 .widget-user {
 
   background-color: $background-color;
+  color: $foreground-color;
 
   .avatar {
     float: left;
-    padding-left: 30px;
+    margin-left: 30px;
 
     img {
       -webkit-border-radius: 50em;
       -moz-border-radius: 50em;
       border-radius: 50em;
     }
+  }
+
+  .profile {
+    float: right;
+    width: 310px;
+
+    h1 {
+      font-weight: 700;
+    }
+
+    .reputation {
+      font-size: 3.2em;
+      font-weight: 500;
+      padding-top: 30px;
+      padding-bottom: 34px;
+    }
+
+    ul {
+      font-weight: 700;
+
+      li:not(:last-child) {
+        margin-right: 26px;
+      }
+
+      li {
+        display: inline-block;
+
+        .rank div {
+          display: inline-block;
+          margin-top: 1px;
+          margin-right: 6px;
+          width: 20px;
+          height: 20px;
+
+          -webkit-border-radius: 50em;
+          -moz-border-radius: 50em;
+          border-radius: 50em;
+        }
+
+        .label {
+          vertical-align: top;
+        }
+
+        .gold {
+          background-color: #FEC337;
+        }
+
+        .silver {
+          background-color: #B8B8B8;
+        }
+
+        .bronze {
+          background-color: #BF8753;
+        }
+      }
+    }
+
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.3);
   }
 
 }

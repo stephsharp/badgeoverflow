@@ -11,7 +11,12 @@ SCHEDULER.every '5m', :first_in => 0 do |job|
       profile_image << "&size=#{avatar_size}"
     end
 
+    badge_counts = user['badge_counts'].map { |r,c| { rank: r, count: c } }
+
     send_event 'user', {
+      name: user['display_name'],
+      reputation: user['reputation'],
+      badge_counts: badge_counts,
       image: profile_image,
       width: avatar_size
     }

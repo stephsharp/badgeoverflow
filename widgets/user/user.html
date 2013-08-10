@@ -1,3 +1,18 @@
 <div class="avatar">
   <img data-bind-src="image" data-bind-width="width"/>
 </div>
+
+<div class="profile">
+  <h1 class="title" data-bind="name"></h1>
+
+  <h1 class="reputation" data-bind="reputation"></h1>
+
+  <ul class="list-nostyle">
+    <li data-foreach-badge_count="badge_counts">
+      <span class="rank"><div data-bind-class="badge_count.rank"></div></span>
+      <span class="label" data-bind="badge_count.count"></span>
+    </li>
+  </ul>
+</div>
+
+<p class="updated-at" data-bind="updatedAtMessage"></p>
