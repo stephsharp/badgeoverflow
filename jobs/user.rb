@@ -1,4 +1,4 @@
-user_id = 1164143
+user_id = 1367622
 avatar_size = 230
 
 SCHEDULER.every '5m', :first_in => 0 do |job|
