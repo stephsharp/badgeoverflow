@@ -19,8 +19,8 @@ module Service
       # +ids+::
       #   the remaining parameters are interpreted as an array of ids
       #
-      def fetch(resource, *ids) # :yields: item_or_items
-        response = get(resource.to_s, ids)
+      def fetch(resource, params = {}) # :yields: item_or_items
+        response = get(resource.to_s, params)
         body = JSON.parse(response.body)
         items = body['items']
 
@@ -37,12 +37,22 @@ module Service
 
       private
 
-      def get(resource, *ids)
-        stack_exchange.get("/2.1/#{resource}/#{ids.join(';')}?site=stackoverflow")
+      def get(resource, params = {})
+        ids = *params.delete(:ids)
+        final_params = default_params.merge(params)
+        stack_exchange.get("/2.1/#{resource}/#{ids.join(';')}?#{param_string(final_params)}")
       end
 
       def stack_exchange
         Net::HTTP.new('api.stackexchange.com')
+      end
+
+      def default_params
+        { site: 'stackoverflow' }
+      end
+
+      def param_string(params)
+        params.map{|k,v| "#{k}=#{v}"}.join('&')
       end
 
     end
