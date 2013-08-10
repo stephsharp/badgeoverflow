@@ -21,7 +21,10 @@ module Service
       #
       def fetch(resource, *ids) # :yields: item_or_items
         response = get(resource.to_s, ids)
-        items = JSON.parse(response.body)['items']
+        body = JSON.parse(response.body)
+        items = body['items']
+
+        puts "Quota Remaining: #{body['quota_remaining']}"
 
         if block_given?
           if items.nil? or items.length == 0
