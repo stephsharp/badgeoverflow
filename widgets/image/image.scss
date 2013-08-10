@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #4b4b4b;
+$background-color:  #ffffff;
 
 // ----------------------------------------------------------------------------
 // Widget-image styles
@@ -9,5 +9,11 @@ $background-color:  #4b4b4b;
 .widget-image {
 
   background-color: $background-color;
+  text-align: center;
+
+  img {
+    vertical-align: middle;
+    width: 98%;
+  }
 
 }
