@@ -48,7 +48,7 @@ SCHEDULER.every '1h', :first_in => '1h' do |job|
     mm, ss = seconds_since_last_badge.divmod(60)
     hh, mm = mm.divmod(60)
     dd, hh = hh.divmod(24)
-    time_since_last_badge = "%d D %d H" % [dd, hh]
+    time_since_last_badge = "<span class=\"number\">%d</span>d&nbsp;&nbsp;&nbsp;<span class=\"number\">%d</span>h" % [dd, hh]
 
     send_event('time_since_last_badge', { :text => time_since_last_badge,
                                           :moreinfo => last_badge['detail']

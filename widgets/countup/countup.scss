@@ -4,7 +4,7 @@
 $background-color:  #808080;
 
 $title-color:       rgba(255, 255, 255, 0.7);
-$moreinfo-color:    rgba(255, 255, 255, 0.7);
+$p-color:           rgba(255, 255, 255, 0.9);
 
 // ----------------------------------------------------------------------------
 // Widget-countup styles
@@ -12,21 +12,55 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 .widget-countup {
 
   background-color: $background-color;
+  vertical-align: top !important;
 
-  .title {
-    color: $title-color;
+  .clock {
+    opacity: 0.15;
+    position: absolute;
+    top: 19%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    background: url('/assets/clock.png') no-repeat center center;
+
+    -webkit-background-size: contain;
+       -moz-background-size: contain;
+            background-size: contain;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
   }
 
-  .more-info {
-    color: $moreinfo-color;
+  .maincontainer {
+
+    .title {
+      color: $title-color;
+      padding-bottom: 25px;
+    }
+
+    h3 {
+
+      font-size: 40px;
+      padding-bottom: 25px;
+
+      .number {
+        font-size: 90px;
+        font-weight: 500;
+      }
+
+    }
+
+    p {
+      color: $p-color;
+      font-weight: 500;
+      font-size: 40px;
+    }
+
   }
 
   .updated-at {
     color: rgba(255, 255, 255, 0.7);
   }
 
-
-  &.large h3 {
-    font-size: 65px;
-  }
 }
