@@ -4,7 +4,7 @@
 $background-color:  #808080;
 
 $title-color:       rgba(255, 255, 255, 0.7);
-$moreinfo-color:    rgba(255, 255, 255, 0.7);
+$subheading-color:  rgba(255, 255, 255, 0.9);
 
 // ----------------------------------------------------------------------------
 // Widget-text styles
@@ -12,21 +12,27 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 .widget-text {
 
   background-color: $background-color;
+  vertical-align: top !important;
 
   .title {
     color: $title-color;
+    padding-bottom: 60px;
   }
 
-  .more-info {
-    color: $moreinfo-color;
+  .heading {
+    font-size: 40px;
+    font-weight: 500;
+    padding-bottom: 25px;
+  }
+
+  .subheading {
+    color: $subheading-color;
+    font-size: 22px;
+    font-weight: 500;
   }
 
   .updated-at {
     color: rgba(255, 255, 255, 0.7);
   }
 
-
-  &.large h3 {
-    font-size: 65px;
-  }
 }
