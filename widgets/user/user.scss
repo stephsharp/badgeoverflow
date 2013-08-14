@@ -28,7 +28,7 @@ $foreground-color: #808080;
     width: 310px;
 
     h1 {
-      font-weight: 700;
+      font-weight: 500;
     }
 
     .reputation {
@@ -81,7 +81,8 @@ $foreground-color: #808080;
   }
 
   .updated-at {
-    color: rgba(0, 0, 0, 0.3);
+    color: $foreground-color;
+    opacity: 0.8;
   }
 
 }
