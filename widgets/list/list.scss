@@ -4,8 +4,7 @@
 $background-color:  #808080;
 
 $title-color:       rgba(255, 255, 255, 0.7);
-$label-color:       rgba(255, 255, 255, 0.7);
-$moreinfo-color:    rgba(255, 255, 255, 0.7);
+$label-color:       rgba(255, 255, 255, 0.85);
 
 // ----------------------------------------------------------------------------
 // Widget-list styles
@@ -13,10 +12,11 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 .widget-list {
 
   background-color: $background-color;
-  vertical-align: top;
+  vertical-align: top !important;
 
   .title {
     color: $title-color;
+    padding-bottom: 20px;
   }
 
   ol, ul {
@@ -30,7 +30,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
   }
 
   li {
-    margin-bottom: 5px;
+    margin-bottom: 12px;
   }
 
   .list-nostyle {
@@ -39,6 +39,8 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
   .label {
     color: $label-color;
+    font-size: 22px;
+    font-weight: 500;
   }
 
   .rank  div {
@@ -54,11 +56,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
   }
 
   .updated-at {
-    color: rgba(0, 0, 0, 0.3);
-  }
-
-  .more-info {
-    color: $moreinfo-color;
+    color: rgba(255, 255, 255, 0.7);
   }
   
   .gold {
