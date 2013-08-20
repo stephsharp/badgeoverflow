@@ -26,7 +26,9 @@ SCHEDULER.every '3m', :first_in => 0 do |job|
 
 
 
-  send_event('unearned_badges', { :background => badge_colour })
+  send_event('unearned_badges', { :text => "Research Assistant",
+                                  :moreinfo => "Description goes here... Description goes here... Description goes here... Description goes here...",
+                                  :background => badge_colour })
 end
 
 # Set background colour of widget to badge rank
