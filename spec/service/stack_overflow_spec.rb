@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'service/stack_overflow'
+require 'stack_exchange/service'
 
-include Service
+include StackExchange::Service
 
 describe StackOverflow, '.fetch' do
   BASE_URL = "http://api.stackexchange.com/2.1"

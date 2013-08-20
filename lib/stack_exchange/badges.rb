@@ -1,7 +1,7 @@
 module StackExchange
 
   class Badge
-    attr_reader :badge_id, :name, :rank, :award_count, :badge_type, :link
+    attr_reader :badge_id, :name, :description, :rank, :award_count, :badge_type, :link
 
     def initialize(badge_json)
       @data = badge_json
@@ -13,6 +13,10 @@ module StackExchange
 
     def name
       @data['name']
+    end
+
+    def description
+      @data['description']
     end
 
     def rank

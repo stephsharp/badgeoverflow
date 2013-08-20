@@ -2,7 +2,7 @@ user_id = 1367622
 avatar_size = 230
 
 SCHEDULER.every '5m', :first_in => 0 do |job|
-  include Service
+  include StackExchange::Service
 
   StackOverflow.fetch 'users', ids: user_id do |user|
     profile_image = user['profile_image']

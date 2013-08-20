@@ -1,3 +1,5 @@
+require_relative '../badges'
+
 module StackExchange
   class Altruist < Badge
     # add callbacks here to return progress percentage, progress string,

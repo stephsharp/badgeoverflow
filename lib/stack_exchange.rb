@@ -1,1 +1,2 @@
-require_relative 'stack_exchange/badge'
+require_relative 'stack_exchange/badges'
+require_relative 'stack_exchange/service'
