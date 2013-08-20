@@ -53,8 +53,10 @@ module StackExchange
       def badge_class_from_name(name)
         if StackExchange.const_defined?(name)
           badge_class = StackExchange.const_get(name)
-        else
-          nil
+
+          if badge_class.ancestors.include?(Badge)
+            badge_class
+          end
         end
       end
 
