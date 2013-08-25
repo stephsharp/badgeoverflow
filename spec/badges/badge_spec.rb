@@ -86,6 +86,14 @@ describe Badge do
 
       specify { expect(badge).to be_kind_of NameWithSpaces }
     end
+
+    context "with a name containing dashes" do
+      class NameWithDashes < Badge; end
+
+      let(:badge_hash) { {"name" => "Name-With-Dashes"} }
+
+      specify { expect(badge).to be_kind_of NameWithDashes }
+    end
   end
 
   describe "#progress" do
