@@ -94,6 +94,14 @@ describe Badge do
 
       specify { expect(badge).to be_kind_of NameWithDashes }
     end
+
+    context "with a name containing '&'" do
+      class NameWithAmp < Badge; end
+
+      let(:badge_hash) { {"name" => "Name & With & Amp"} }
+
+      specify { expect(badge).to be_kind_of NameWithAmp }
+    end
   end
 
   describe "#progress" do

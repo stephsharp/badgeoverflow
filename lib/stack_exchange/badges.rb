@@ -24,7 +24,7 @@ module StackExchange
       alias_method :orig_new, :new
 
       def new(badge_json, *args)
-        badge_class = badge_class_from_name(badge_json['name'].gsub(/[\s-]/, ''))
+        badge_class = badge_class_from_name(badge_json['name'])
 
         if should_instantiate_subclass?(badge_class)
           badge_class.new(badge_json, *args)
@@ -36,8 +36,10 @@ module StackExchange
       private
 
       def badge_class_from_name(name)
-        if StackExchange.const_defined?(name)
-          badge_class = StackExchange.const_get(name)
+        constant_name = constantise(name)
+
+        if StackExchange.const_defined?(constant_name)
+          badge_class = StackExchange.const_get(constant_name)
 
           if badge_class.ancestors.include?(Badge)
             badge_class
@@ -47,6 +49,10 @@ module StackExchange
 
       def should_instantiate_subclass?(subclass)
         subclass && self != subclass
+      end
+
+      def constantise(badge_name)
+        badge_name.gsub(/[\W]/, '')
       end
     end
   end
