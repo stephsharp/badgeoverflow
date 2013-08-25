@@ -25,8 +25,6 @@ module StackExchange
           body = JSON.parse(response.body)
           items = body['items']
 
-          puts "Quota Remaining: #{body['quota_remaining']}"
-
           if block_given?
             if items.nil? or items.length == 0
               yield nil
