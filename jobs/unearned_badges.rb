@@ -19,8 +19,11 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   loop do
     named_badges_response = JSON.parse(stack_exchange.get("/2.1/badges/name?page=#{page_number}&pagesize=30&order=desc&sort=rank&site=stackoverflow&filter=!9j_cPloMN").body)
 
-    # Create array of badge ids
-    named_badges += named_badges_response['items']
+    # Create array of badges
+    named_badges += named_badges_response['items'].map do |badge_data|
+      StackExchange::Badge.new(badge_data, user_id)
+    end
+
     page_number += 1
     backoff = named_badges_response['backoff']
 
@@ -52,7 +55,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   end
 
   # get unearned badge ids (in array 1, but not in array 2)
-  named_badge_ids = named_badges.map { |badge| badge['badge_id'] }
+  named_badge_ids = named_badges.map { |badge| badge.badge_id }
   unearned_badge_ids = named_badge_ids - user_badge_ids
 
   # where there is a set of badges (bronze, silver, gold),
@@ -62,17 +65,15 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
 
   # choose badge at random from the array
   random_badge_id = unearned_badge_ids.sample
-  random_badge = named_badges.find { |badge| badge['badge_id'] == random_badge_id }
+  random_badge = named_badges.find { |badge| badge.badge_id == random_badge_id }
 
   # display name of badge, and what is required to earn the badge (description)
   # personalise the description to what the user needs to earn the bagde?
   # e.g. "You only need 4 more comments with score of 5 or more."
 
-
-
-  send_event('unearned_badges', { :text => random_badge['name'],
-                                  :moreinfo => random_badge['description'],
-                                  :background => badge_colour(random_badge['rank']) })
+  send_event('unearned_badges', { :text => random_badge.name,
+                                  :moreinfo => random_badge.progress,
+                                  :background => badge_colour(random_badge.rank) })
 end
 
 # Set background colour of widget to badge rank
