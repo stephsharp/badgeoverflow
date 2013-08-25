@@ -72,6 +72,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   # e.g. "You only need 4 more comments with score of 5 or more."
 
   send_event('unearned_badges', { :text => random_badge.name,
+                                  :link => random_badge.link,
                                   :moreinfo => random_badge.progress,
                                   :background => badge_colour(random_badge.rank) })
 end
