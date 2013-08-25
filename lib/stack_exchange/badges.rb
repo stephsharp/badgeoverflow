@@ -8,6 +8,10 @@ module StackExchange
       @user_id = user_id
     end
 
+    def progress
+      description
+    end
+
     def badge_id;    @data['badge_id'];    end
     def name;        @data['name'];        end
     def description; @data['description']; end

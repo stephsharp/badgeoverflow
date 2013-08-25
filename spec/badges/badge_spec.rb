@@ -22,7 +22,7 @@ end
 include StackExchange
 
 describe Badge do
-  let(:badge_hash) { Hash.new }
+  let(:badge_hash) { {"name" => "Badge"} }
   let(:user_id) { nil }
   let(:badge) { Badge.new(badge_hash, user_id) }
 
@@ -85,6 +85,13 @@ describe Badge do
       let(:badge_hash) { {"name" => "Name With Spaces"} }
 
       specify { expect(badge).to be_kind_of NameWithSpaces }
+    end
+  end
+
+  describe "#progress" do
+    it "returns the badge's description" do
+      badge.stub(:description) { "The Description" }
+      expect(badge.progress).to eq "The Description"
     end
   end
 end
