@@ -71,6 +71,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
 
 
   send_event('unearned_badges', { :text => random_badge['name'],
+                                  :link => random_badge['link'],
                                   :moreinfo => random_badge['description'],
                                   :background => badge_colour(random_badge['rank']) })
 end
