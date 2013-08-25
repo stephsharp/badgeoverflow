@@ -8,33 +8,13 @@ module StackExchange
       @user_id = user_id
     end
 
-    def badge_id
-      @data['badge_id']
-    end
-
-    def name
-      @data['name']
-    end
-
-    def description
-      @data['description']
-    end
-
-    def rank
-      @data['rank']
-    end
-
-    def award_count
-      @data['award_count']
-    end
-
-    def badge_type
-      @data['badge_type']
-    end
-
-    def link
-      @data['link']
-    end
+    def badge_id;    @data['badge_id'];    end
+    def name;        @data['name'];        end
+    def description; @data['description']; end
+    def rank;        @data['rank'];        end
+    def award_count; @data['award_count']; end
+    def badge_type;  @data['badge_type'];  end
+    def link;        @data['link'];        end
 
     class << self
       alias_method :orig_new, :new
