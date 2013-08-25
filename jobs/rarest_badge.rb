@@ -58,7 +58,7 @@ SCHEDULER.every '1h', :first_in => '1h' do |job|
     end  
 
     # Display badge name with award_count below
-    formatted_award_count = rarest_badge['award_count'].to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
+    formatted_award_count = with_suffix(rarest_badge['award_count'])
     send_event('rarest_badge', { :text => rarest_badge['name'], 
                                  :moreinfo => "Awarded #{formatted_award_count} times",
                                  :background => badge_colour(rarest_badge['rank'])
@@ -77,5 +77,15 @@ def badge_colour (badge_rank = nil)
     '#FEC337'
   else
     '#808080'
+  end
+end
+
+def with_suffix (count)
+  suffix = ["k", "m"]
+  if (count < 1000)
+    count.to_s
+  else
+    exp = (Math.log(count) / Math.log(1000)).to_i
+    "%.1f%c" % [(count.to_f / 1000 ** exp).round(1), suffix[exp-1]]
   end
 end
