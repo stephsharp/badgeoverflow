@@ -23,7 +23,8 @@ include StackExchange
 
 describe Badge do
   let(:badge_hash) { Hash.new }
-  let(:badge) { Badge.new(badge_hash) }
+  let(:user_id) { nil }
+  let(:badge) { Badge.new(badge_hash, user_id) }
 
   context "when initialised with #{parsed_badge_with_name(:Altruist)}" do
     let(:badge_hash) { parsed_badge_with_name(:Altruist) }
@@ -48,6 +49,14 @@ describe Badge do
     end
     it "has link http://stackoverflow.com/badges/222/altruist" do
       expect(badge.link).to eq "http://stackoverflow.com/badges/222/altruist"
+    end
+
+    context "and user id 123" do
+      let(:user_id) { 123 }
+
+      it "has user_id 123" do
+        expect(badge.user_id).to eq 123
+      end
     end
   end
 

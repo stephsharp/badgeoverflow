@@ -1,10 +1,11 @@
 module StackExchange
 
   class Badge
-    attr_reader :badge_id, :name, :description, :rank, :award_count, :badge_type, :link
+    attr_reader :badge_id, :user_id, :name, :description, :rank, :award_count, :badge_type, :link
 
-    def initialize(badge_json)
+    def initialize(badge_json, user_id)
       @data = badge_json
+      @user_id = user_id
     end
 
     def badge_id
@@ -38,13 +39,13 @@ module StackExchange
     class << self
       alias_method :orig_new, :new
 
-      def new(badge_json)
+      def new(badge_json, *args)
         badge_class = badge_class_from_name(badge_json['name'])
 
         if should_instantiate_subclass?(badge_class)
-          badge_class.new(badge_json)
+          badge_class.new(badge_json, *args)
         else
-          orig_new(badge_json)
+          orig_new(badge_json, *args)
         end
       end
 
