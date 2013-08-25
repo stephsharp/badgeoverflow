@@ -78,5 +78,13 @@ describe Badge do
       specify { expect(badge).to be_kind_of Badge }
       specify { expect(badge).not_to be_kind_of Gorbypuff }
     end
+
+    context "with a name containing spaces" do
+      class NameWithSpaces < Badge; end
+
+      let(:badge_hash) { {"name" => "Name With Spaces"} }
+
+      specify { expect(badge).to be_kind_of NameWithSpaces }
+    end
   end
 end

@@ -40,7 +40,7 @@ module StackExchange
       alias_method :orig_new, :new
 
       def new(badge_json, *args)
-        badge_class = badge_class_from_name(badge_json['name'])
+        badge_class = badge_class_from_name(badge_json['name'].gsub(/\s/, ''))
 
         if should_instantiate_subclass?(badge_class)
           badge_class.new(badge_json, *args)
