@@ -4,6 +4,10 @@ require 'json'
 class UnearnedBadgesJob
   attr_reader :user_id
 
+  def self.run(*args)
+    new(*args).run
+  end
+
   def initialize(user_id)
     @user_id = user_id
   end
@@ -106,5 +110,5 @@ SCHEDULER.every '1h', :first_in => 0 do
   # Jeff Atwood: 1
   user_id = 1367622
 
-  UnearnedBadgesJob.new(user_id).run
+  UnearnedBadgesJob.run(user_id)
 end
