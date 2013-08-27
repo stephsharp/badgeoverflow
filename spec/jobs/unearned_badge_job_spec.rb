@@ -27,4 +27,8 @@ describe UnearnedBadgesJob do
       specify { expect(job.user_id).to eq 123 }
     end
   end
+
+  describe "#service" do
+    specify { expect(job.service).to be_kind_of StackOverflowService }
+  end
 end

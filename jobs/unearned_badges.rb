@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 
 class UnearnedBadgesJob
-  attr_reader :user_id
+  attr_reader :user_id, :service
 
   def self.run(*args)
     new(*args).run
@@ -13,7 +13,7 @@ class UnearnedBadgesJob
   end
 
   def service
-    StackOverflowService
+    @service ||= StackOverflowService.new
   end
 
   def run
