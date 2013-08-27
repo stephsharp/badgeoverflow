@@ -2,10 +2,11 @@ require 'net/http'
 require 'json'
 
 class StackExchangeService
-  attr_reader :site
+  attr_reader :site, :api_version
 
-  def initialize(site = 'stackoverflow')
+  def initialize(site = 'stackoverflow', api_version = 2.1)
     @site = site
+    @api_version = api_version
   end
 
   # Fetches 1 or more of a given resource.
@@ -68,7 +69,7 @@ class StackExchangeService
   def get(primary_resource, secondary_resource, params = {})
     ids = *params.delete(:ids)
 
-    path = "/2.1/#{primary_resource}/"
+    path = "/#{api_version}/#{primary_resource}/"
     path << "#{ids.join(';')}/" unless ids.empty?
     path << "#{secondary_resource}/" if secondary_resource
 

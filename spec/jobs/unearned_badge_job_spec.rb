@@ -33,5 +33,6 @@ describe UnearnedBadgesJob do
 
     specify { expect(service).to be_kind_of StackExchangeService }
     specify { expect(service.site).to eq 'stackoverflow' }
+    specify { expect(service.api_version).to eq 2.1 }
   end
 end
