@@ -2,6 +2,11 @@ require 'net/http'
 require 'json'
 
 class StackExchangeService
+  attr_reader :site
+
+  def initialize(site = 'stackoverflow')
+    @site = site
+  end
 
   # Fetches 1 or more of a given resource.
   #
@@ -73,11 +78,11 @@ class StackExchangeService
   end
 
   def stack_exchange
-    Net::HTTP.new('api.stackexchange.com')
+    @stack_exchange ||= Net::HTTP.new('api.stackexchange.com')
   end
 
   def default_params
-    { site: 'stackoverflow', pagesize: 30 }
+    { site: site, pagesize: 30 }
   end
 
   def param_string(params)

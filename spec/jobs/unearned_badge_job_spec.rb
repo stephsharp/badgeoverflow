@@ -32,5 +32,6 @@ describe UnearnedBadgesJob do
     let(:service) { job.service }
 
     specify { expect(service).to be_kind_of StackExchangeService }
+    specify { expect(service.site).to eq 'stackoverflow' }
   end
 end
