@@ -41,13 +41,13 @@ module StackExchange
             break unless body['has_more']
           end
 
+          result = items.length == 1 ? items.first : items
+
           if block_given?
-            if items.empty?
-              yield nil
-            else
-              yield items.length == 1 ? items.first : items
-            end
+            yield result
           end
+
+          result
         end
 
         private

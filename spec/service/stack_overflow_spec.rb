@@ -21,6 +21,23 @@ describe StackOverflow, '.fetch' do
 
   context "with no block given" do
     specify { expect { StackOverflow.fetch(resource) }.not_to raise_error }
+
+    context "with a valid response" do
+      let(:body) { '{"items":[{"foo":"bar"}]}' }
+
+      specify do
+        expect(StackOverflow.fetch(resource)).not_to be_nil
+      end
+
+      it "returns the same value that is yielded to the block" do
+        yielded_args = nil
+        returned_value = StackOverflow.fetch(resource) do |args|
+          yielded_args = args
+        end
+
+        expect(returned_value).to eq yielded_args
+      end
+    end
   end
 
   describe "requests" do
@@ -47,7 +64,7 @@ describe StackOverflow, '.fetch' do
     context "with no 'items' key" do
       before { stub_request(:get, endpoint).to_return(:body => '{"has_more": false}') }
 
-      specify { expect { |b| StackOverflow.fetch(resource, &b) }.to yield_with_args(nil) }
+      specify { expect { |b| StackOverflow.fetch(resource, &b) }.to yield_with_args([]) }
     end
 
     context "with 2 pages" do
