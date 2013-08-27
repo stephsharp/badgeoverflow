@@ -21,12 +21,24 @@ module StackExchange
         #   the remaining parameters are interpreted as an array of ids
         #
         def fetch(resource, params = {}) # :yields: item_or_items
-          response = get(resource.to_s, params)
-          body = JSON.parse(response.body)
-          items = body['items']
+          items = []
+          page = 1
+
+          loop do
+            response = get(resource.to_s, params.merge(page: page))
+            body = JSON.parse(response.body)
+
+            response_items = body['items']
+            response_items ||= []
+            items += response_items
+
+            page += 1
+
+            break unless body['has_more']
+          end
 
           if block_given?
-            if items.nil? or items.length == 0
+            if items.empty?
               yield nil
             else
               yield items.length == 1 ? items.first : items
@@ -47,7 +59,7 @@ module StackExchange
         end
 
         def default_params
-          { site: 'stackoverflow' }
+          { site: 'stackoverflow', pagesize: 30 }
         end
 
         def param_string(params)
