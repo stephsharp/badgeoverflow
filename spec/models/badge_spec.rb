@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'stack_exchange/badges'
+require 'models/badges'
 require 'json'
 require 'ostruct'
 
@@ -18,8 +18,6 @@ BADGES = {
 def parsed_badge_with_name(badge_name)
   JSON.parse(BADGES[badge_name])
 end
-
-include StackExchange
 
 describe Badge do
   let(:badge_hash) { {"name" => "Badge"} }

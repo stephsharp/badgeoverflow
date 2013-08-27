@@ -13,7 +13,7 @@ class UnearnedBadgesJob
   end
 
   def service
-    StackExchange::Service::StackOverflow
+    StackOverflowService
   end
 
   def run

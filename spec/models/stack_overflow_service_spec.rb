@@ -1,9 +1,7 @@
 require 'spec_helper'
-require 'stack_exchange/service'
+require 'models/stack_overflow_service'
 
-include StackExchange::Service
-
-describe StackOverflow, '.fetch' do
+describe StackOverflowService, '::fetch' do
   BASE_URL = "http://api.stackexchange.com/2.1"
   PARAMS = { site: "stackoverflow", page: 1, pagesize: 30 }
 
@@ -20,18 +18,18 @@ describe StackOverflow, '.fetch' do
   before { stub_request(:get, endpoint).to_return(:body => body) }
 
   context "with no block given" do
-    specify { expect { StackOverflow.fetch(resource) }.not_to raise_error }
+    specify { expect { StackOverflowService.fetch(resource) }.not_to raise_error }
 
     context "with a valid response" do
       let(:body) { '{"items":[{"foo":"bar"}]}' }
 
       specify do
-        expect(StackOverflow.fetch(resource)).not_to be_nil
+        expect(StackOverflowService.fetch(resource)).not_to be_nil
       end
 
       it "returns the same value that is yielded to the block" do
         yielded_args = nil
-        returned_value = StackOverflow.fetch(resource) do |args|
+        returned_value = StackOverflowService.fetch(resource) do |args|
           yielded_args = args
         end
 
@@ -45,7 +43,7 @@ describe StackOverflow, '.fetch' do
       let(:resource) { :users }
 
       it "hits /users/ endpoint" do
-        StackOverflow.fetch(:users)
+        StackOverflowService.fetch(:users)
         a_request(:get, url_with("users")).should have_been_made
       end
     end
@@ -54,7 +52,7 @@ describe StackOverflow, '.fetch' do
       let (:resource) { :badges }
 
       it "hits /badges/ endpoint" do
-        StackOverflow.fetch(:badges)
+        StackOverflowService.fetch(:badges)
         a_request(:get, url_with("badges")).should have_been_made
       end
     end
@@ -64,7 +62,7 @@ describe StackOverflow, '.fetch' do
     context "with no 'items' key" do
       before { stub_request(:get, endpoint).to_return(:body => '{"has_more": false}') }
 
-      specify { expect { |b| StackOverflow.fetch(resource, &b) }.to yield_with_args([]) }
+      specify { expect { |b| StackOverflowService.fetch(resource, &b) }.to yield_with_args([]) }
     end
 
     context "with 2 pages" do
@@ -77,13 +75,13 @@ describe StackOverflow, '.fetch' do
       end
 
       it "requests page 2" do
-        StackOverflow.fetch(:badges)
+        StackOverflowService.fetch(:badges)
         a_request(:get, url_with(:badges, :page => 2)).should have_been_made
       end
 
       it "yields the concatenated array of items" do
         expected_args = [{"foo"=>"bar"},{"baz"=>"quux"}]
-        expect { |b| StackOverflow.fetch(:badges, &b) }.to yield_with_args expected_args
+        expect { |b| StackOverflowService.fetch(:badges, &b) }.to yield_with_args expected_args
       end
     end
   end
