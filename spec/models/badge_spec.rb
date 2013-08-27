@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'models/badges'
+require 'models/badges/badge'
 require 'json'
 require 'ostruct'
 

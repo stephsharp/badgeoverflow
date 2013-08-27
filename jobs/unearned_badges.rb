@@ -26,7 +26,7 @@ class UnearnedBadgesJob
       pagesize: 100
     }
 
-    named_badges.map! { |b| StackExchange::Badge.new(b, user_id) }
+    named_badges.map! { |b| Badge.new(b, user_id) }
 
     # get all badge ids the user has earned and store in array
     user_badge_ids = []
