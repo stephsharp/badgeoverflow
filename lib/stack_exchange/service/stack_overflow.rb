@@ -24,7 +24,12 @@ module StackExchange
         #   string, except for the special param +:ids+ which is an
         #   array of ids passed into the URL path
         #
-        def fetch(primary_resource, secondary_resource = nil, params) # :yields: item_or_items
+        def fetch(primary_resource, secondary_resource = nil, params = {}) # :yields: item_or_items
+          if secondary_resource.kind_of? Hash
+            params = secondary_resource
+            secondary_resource = nil
+          end
+
           items = []
           page = 1
 
