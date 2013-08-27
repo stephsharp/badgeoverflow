@@ -15,17 +15,21 @@ module StackExchange
         # 'items' array.
         #
         # Params:
-        # +resource+::
-        #   the stack exchange resource, e.g., "users" or "badges"
-        # +ids+::
-        #   the remaining parameters are interpreted as an array of ids
+        # +primary_resource+::
+        #   the stack exchange resource, e.g., "users", "badges/name"
+        # +secondary_resource+::
+        #   an optional nested resource, e.g., "users/1/badges"
+        # +params+::
+        #   an optional params hash; all passed through to the query
+        #   string, except for the special param +:ids+ which is an
+        #   array of ids passed into the URL path
         #
-        def fetch(resource, params = {}) # :yields: item_or_items
+        def fetch(primary_resource, secondary_resource = nil, params) # :yields: item_or_items
           items = []
           page = 1
 
           loop do
-            response = get(resource.to_s, params.merge(page: page))
+            response = get(primary_resource, secondary_resource, params.merge(page: page))
             body = JSON.parse(response.body)
 
             response_items = body['items']
@@ -48,10 +52,16 @@ module StackExchange
 
         private
 
-        def get(resource, params = {})
+        def get(primary_resource, secondary_resource, params = {})
           ids = *params.delete(:ids)
+
+          path = "/2.1/#{primary_resource}/"
+          path << "#{ids.join(';')}/" unless ids.empty?
+          path << "#{secondary_resource}/" if secondary_resource
+
           final_params = default_params.merge(params)
-          stack_exchange.get("/2.1/#{resource}/#{ids.join(';')}?#{param_string(final_params)}")
+
+          stack_exchange.get("#{path}?#{param_string(final_params)}")
         end
 
         def stack_exchange
