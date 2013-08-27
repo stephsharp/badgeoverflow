@@ -38,7 +38,14 @@ module StackExchange
 
             page += 1
 
-            break unless body['has_more']
+            if body['has_more']
+              backoff = body['backoff']
+              if backoff
+                sleep backoff
+              end
+            else
+              break
+            end
           end
 
           result = items.length == 1 ? items.first : items
