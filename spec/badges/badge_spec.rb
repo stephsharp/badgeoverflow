@@ -102,6 +102,14 @@ describe Badge do
 
       specify { expect(badge).to be_kind_of NameWithAmp }
     end
+
+    context "with a tag name" do
+      class TagBadge < Badge; end
+
+      let(:badge_hash) { {"name" => "tag-badge"} }
+
+      specify { expect(badge).to be_kind_of TagBadge }
+    end
   end
 
   describe "#progress" do

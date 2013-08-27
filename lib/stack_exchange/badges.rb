@@ -52,7 +52,7 @@ module StackExchange
       end
 
       def constantise(badge_name)
-        badge_name.gsub(/[\W]/, '')
+        badge_name.split(/[\W]/).map(&:capitalize).join
       end
     end
   end
