@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'models/stack_overflow_service'
+require 'models/stack_exchange_service'
 
-describe StackOverflowService, '#fetch' do
+describe StackExchangeService, '#fetch' do
   BASE_URL = "http://api.stackexchange.com/2.1"
   PARAMS = { site: "stackoverflow", page: 1, pagesize: 30 }
 
@@ -10,7 +10,7 @@ describe StackOverflowService, '#fetch' do
     "#{BASE_URL}/#{resource}/?#{PARAMS.merge(params).map{|k,v|"#{k}=#{v}"}.join('&')}"
   end
 
-  let(:service)  { StackOverflowService.new }
+  let(:service)  { StackExchangeService.new }
 
   let(:resource) { :users }
   let(:body)     { '{"has_more": false}' }

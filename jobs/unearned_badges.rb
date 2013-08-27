@@ -13,7 +13,7 @@ class UnearnedBadgesJob
   end
 
   def service
-    @service ||= StackOverflowService.new
+    @service ||= StackExchangeService.new
   end
 
   def run

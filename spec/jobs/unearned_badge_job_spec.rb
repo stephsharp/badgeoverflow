@@ -29,6 +29,8 @@ describe UnearnedBadgesJob do
   end
 
   describe "#service" do
-    specify { expect(job.service).to be_kind_of StackOverflowService }
+    let(:service) { job.service }
+
+    specify { expect(service).to be_kind_of StackExchangeService }
   end
 end

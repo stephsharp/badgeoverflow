@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 
-class StackOverflowService
+class StackExchangeService
 
   # Fetches 1 or more of a given resource.
   #
