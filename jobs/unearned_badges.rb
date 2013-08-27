@@ -12,34 +12,24 @@ class UnearnedBadgesJob
     @user_id = user_id
   end
 
+  def service
+    StackExchange::Service::StackOverflow
+  end
+
   def run
     stack_exchange = Net::HTTP.new('api.stackexchange.com')
-    named_badges = []
-    user_badge_ids = []
-    page_number = 1
 
-    # get all named badge ids and store in an array
-    loop do
-      named_badges_response = JSON.parse(stack_exchange.get("/2.1/badges/name?page=#{page_number}&pagesize=30&order=desc&sort=rank&site=stackoverflow&filter=!9j_cPloMN").body)
+    named_badges = service.fetch 'badges/name', {
+      filter: '!9j_cPloMN',
+      order: 'desc',
+      sort: 'rank',
+      pagesize: 100
+    }
 
-      # Create array of badges
-      named_badges += named_badges_response['items'].map do |badge_data|
-        StackExchange::Badge.new(badge_data, user_id)
-      end
-
-      page_number += 1
-      backoff = named_badges_response['backoff']
-
-      if backoff
-        sleep backoff
-      end
-
-      # break loop if there are no more pages
-      break unless named_badges_response['has_more']
-    end
+    named_badges.map! { |b| StackExchange::Badge.new(b, user_id) }
 
     # get all badge ids the user has earned and store in array
-    # REFACTOR THIS LOOP... IT'S PRETTY MUCH THE SAME AS ABOVE
+    user_badge_ids = []
     page_number = 1
     loop do
       user_badges_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/badges?page=#{page_number}&pagesize=30&site=stackoverflow").body)
