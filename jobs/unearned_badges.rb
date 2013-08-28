@@ -29,23 +29,8 @@ class UnearnedBadgesJob
     named_badges.map! { |b| Badge.new(b, user_id) }
 
     # get all badge ids the user has earned and store in array
-    user_badge_ids = []
-    page_number = 1
-    loop do
-      user_badges_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/badges?page=#{page_number}&pagesize=30&site=stackoverflow").body)
-
-      # Create array of badge ids
-      user_badge_ids += user_badges_response['items'].map { |badge| badge['badge_id'] }
-      page_number += 1
-      backoff = user_badges_response['backoff']
-
-      if backoff
-        sleep backoff
-      end
-
-      # break loop if there are no more pages
-      break unless user_badges_response['has_more']
-    end
+    user_badges = service.fetch('users', 'badges', ids: user_id)
+    user_badge_ids = user_badges.map { |b| b['badge_id'] }
 
     # get unearned badge ids (in array 1, but not in array 2)
     named_badge_ids = named_badges.map { |badge| badge.badge_id }
