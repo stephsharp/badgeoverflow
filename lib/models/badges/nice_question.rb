@@ -17,7 +17,7 @@ class NiceQuestion < Badge
     }).to_a.first
 
     title = question['title']
-    score = question['score'].to_i
+    score = question['score']
     remaining = 10 - score
 
     "Your question \"#{title}\" has #{score} votes. #{remaining} votes to go!"
