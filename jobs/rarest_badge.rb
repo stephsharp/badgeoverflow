@@ -1,6 +1,10 @@
 require 'net/http'
 require 'json'
 
+class Badge
+  include RankColour
+end
+
 # Steph Sharp: 1367622 
 # Adam Sharp: 1164143
 # David Underwood: 131066
@@ -57,12 +61,14 @@ SCHEDULER.every '1h', :first_in => '1h' do |job|
       break unless badges_response['has_more']
     end  
 
+    rarest_badge = Badge.new(rarest_badge, user_id)
+
     # Display badge name with award_count below
-    formatted_award_count = with_suffix(rarest_badge['award_count'])
-    send_event('rarest_badge', { :text => rarest_badge['name'], 
-                                 :link => rarest_badge['link'],
+    formatted_award_count = with_suffix(rarest_badge.award_count)
+    send_event('rarest_badge', { :text => rarest_badge.name,
+                                 :link => rarest_badge.link,
                                  :moreinfo => "Awarded #{formatted_award_count} times",
-                                 :background => badge_colour(rarest_badge['rank'])
+                                 :background => rarest_badge.colour_for_rank
                                 })
   end
 end

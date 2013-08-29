@@ -1,6 +1,10 @@
 require 'net/http'
 require 'json'
 
+class Badge
+  include RankColour
+end
+
 class UnearnedBadgesJob
   attr_reader :user_id, :service
 
@@ -56,7 +60,7 @@ class UnearnedBadgesJob
     send_event('unearned_badges', { :text => random_badge.name,
                                     :link => random_badge.link,
                                     :moreinfo => random_badge.progress,
-                                    :background => badge_colour(random_badge.rank) })
+                                    :background => random_badge.colour_for_rank })
   end
 end
 
