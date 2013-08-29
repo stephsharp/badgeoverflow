@@ -1,4 +1,3 @@
-# TODO: Add option to service.fetch to disable paging
 # TODO: Restrict question title length to n characters
 
 class NiceQuestion < Badge
@@ -19,12 +18,28 @@ class NiceQuestion < Badge
 
     title = question['title']
     score = question['score']
-    remaining = 10 - score
+    remaining = required_score - score
 
     "Your question \"#{title}\" has #{score} votes. #{remaining} votes to go!"
   end
 
+  def required_score
+    10
+  end
+
   def service
     @service ||= StackExchangeService.new('stackoverflow')
+  end
+end
+
+class GoodQuestion < NiceQuestion
+  def required_score
+    25
+  end
+end
+
+class GreatQuestion < NiceQuestion
+  def required_score
+    100
   end
 end
