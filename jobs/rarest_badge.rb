@@ -60,6 +60,7 @@ SCHEDULER.every '1h', :first_in => '1h' do |job|
     # Display badge name with award_count below
     formatted_award_count = with_suffix(rarest_badge['award_count'])
     send_event('rarest_badge', { :text => rarest_badge['name'], 
+                                 :link => rarest_badge['link'],
                                  :moreinfo => "Awarded #{formatted_award_count} times",
                                  :background => badge_colour(rarest_badge['rank'])
                                 })
