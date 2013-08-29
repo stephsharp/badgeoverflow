@@ -110,10 +110,10 @@ describe Badge do
     end
   end
 
-  describe "#progress" do
+  describe "#progress_description" do
     it "returns the badge's description" do
       badge.stub(:description) { "The Description" }
-      expect(badge.progress).to eq "The Description"
+      expect(badge.progress_description).to eq "The Description"
     end
   end
 end
