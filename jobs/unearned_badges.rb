@@ -58,22 +58,6 @@ class UnearnedBadgesJob
                                     :moreinfo => random_badge.progress,
                                     :background => badge_colour(random_badge.rank) })
   end
-
-  private
-
-  # Set background colour of widget to badge rank
-  def badge_colour (badge_rank = nil)
-    case badge_rank
-    when 'bronze'
-      '#BF8753'
-    when 'silver'
-      '#B8B8B8'
-    when 'gold'
-      '#FEC337'
-    else
-      '#808080'
-    end
-  end
 end
 
 SCHEDULER.every '1h', :first_in => 0 do
