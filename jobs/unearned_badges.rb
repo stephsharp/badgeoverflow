@@ -57,9 +57,10 @@ class UnearnedBadgesJob
     # personalise the description to what the user needs to earn the bagde?
     # e.g. "You only need 4 more comments with score of 5 or more."
 
-    send_event('unearned_badges', { :text => random_badge.name,
+    send_event('unearned_badges', { :title => random_badge.progress_title,
+                                    :text => random_badge.name,
                                     :link => random_badge.link,
-                                    :moreinfo => random_badge.progress,
+                                    :moreinfo => random_badge.progress_description,
                                     :background => random_badge.colour_for_rank })
   end
 end

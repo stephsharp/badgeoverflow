@@ -6,8 +6,12 @@ class Badge
     @user_id = user_id
   end
 
-  def progress
+  def progress_description
     description
+  end
+
+  def progress_title
+    "Have you considered..."
   end
 
   def badge_id;    @data['badge_id'];    end
