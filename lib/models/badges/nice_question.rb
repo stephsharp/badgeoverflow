@@ -13,8 +13,9 @@ class NiceQuestion < Badge
       ids: user_id,
       sort: 'votes',
       order: 'desc',
-      pagesize: 1
-    }).to_a.first
+      pagesize: 1,
+      fetch_all_pages: false
+    })
 
     title = question['title']
     score = question['score']

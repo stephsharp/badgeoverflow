@@ -32,8 +32,11 @@ class StackExchangeService
       secondary_resource = nil
     end
 
-    items = []
     page = 1
+    fetch_all_pages = params.delete(:fetch_all_pages)
+    fetch_all_pages = true if fetch_all_pages.nil?
+
+    items = []
 
     loop do
       response = get(primary_resource, secondary_resource, params.merge(page: page))
@@ -45,7 +48,7 @@ class StackExchangeService
 
       page += 1
 
-      if body['has_more']
+      if fetch_all_pages && body['has_more']
         backoff = body['backoff']
         if backoff
           sleep backoff

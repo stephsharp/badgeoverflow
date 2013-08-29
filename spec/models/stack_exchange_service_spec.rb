@@ -77,13 +77,20 @@ describe StackExchangeService, '#fetch' do
       end
 
       it "requests page 2" do
-        service.fetch(:badges)
+        service.fetch(:badges, fetch_all_pages: true)
         a_request(:get, url_with(:badges, :page => 2)).should have_been_made
       end
 
       it "yields the concatenated array of items" do
         expected_args = [{"foo"=>"bar"},{"baz"=>"quux"}]
-        expect { |b| service.fetch(:badges, &b) }.to yield_with_args expected_args
+        expect { |b| service.fetch(:badges, fetch_all_pages: true, &b) }.to yield_with_args expected_args
+      end
+
+      context "and fetch_all_pages is false" do
+        it "doesn't request page 2" do
+          service.fetch(:badges, fetch_all_pages: false)
+          a_request(:get, url_with(:page => 2)).should_not have_been_made
+        end
       end
     end
   end
