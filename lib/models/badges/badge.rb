@@ -1,5 +1,5 @@
 class Badge
-  attr_reader :badge_id, :user_id, :name, :description, :rank, :award_count, :badge_type, :link
+  attr_reader :badge_id, :user_id, :name, :description, :rank, :award_count, :badge_type, :link, :series
 
   def initialize(badge_json, user_id)
     @data = badge_json
@@ -12,6 +12,10 @@ class Badge
 
   def progress_title
     "Have you considered..."
+  end
+
+  def series
+    @series ||= @@series[self.class]
   end
 
   def badge_id;    @data['badge_id'];    end
@@ -33,6 +37,11 @@ class Badge
       else
         orig_new(badge_json, *args)
       end
+    end
+
+    def series(name)
+      raise "series name must be a symbol" unless name.kind_of?(Symbol)
+      @@series[self] = name
     end
 
     private
@@ -57,4 +66,6 @@ class Badge
       badge_name.split(/[\W]/).map(&:capitalize).join
     end
   end
+
+  @@series = {}
 end

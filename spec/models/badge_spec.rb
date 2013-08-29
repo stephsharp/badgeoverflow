@@ -110,6 +110,25 @@ describe Badge do
     end
   end
 
+  describe "::series" do
+    it "defines the series on all instances" do
+      class BadgeInSeries < Badge
+        series :the_series
+      end
+
+      badge = BadgeInSeries.new('{"name":"Badge In Series"}', nil)
+      expect(badge.series).to eq :the_series
+    end
+
+    context "with a series name that isn't a symbol" do
+      let(:bad_series_definition) {
+        lambda { class Badness < Badge; series 'oh noes'; end }
+      }
+
+      specify { expect(&bad_series_definition).to raise_error }
+    end
+  end
+
   describe "#progress_description" do
     it "returns the badge's description" do
       badge.stub(:description) { "The Description" }
