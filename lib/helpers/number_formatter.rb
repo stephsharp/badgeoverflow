@@ -1,9 +1,15 @@
-def with_suffix (count)
-  suffix = ["k", "m"]
-  if (count < 1000)
-    count.to_s
-  else
-    exp = (Math.log(count) / Math.log(1000)).to_i
-    "%.1f%c" % [(count.to_f / 1000 ** exp).round(1), suffix[exp-1]]
+module NumberFormatter
+  def with_suffix
+    suffix = ["k", "m"]
+    if (self < 1000)
+      self.to_s
+    else
+      exp = (Math.log(count) / Math.log(1000)).to_i
+      "%.1f%c" % [(self.to_f / 1000 ** exp).round(1), suffix[exp-1]]
+    end
   end
+end
+
+class Numeric
+  include NumberFormatter
 end

@@ -16,7 +16,7 @@ SCHEDULER.every '5m', :first_in => 0 do |job|
     send_event 'user', {
       name: user['display_name'],
       link: user['link'],
-      reputation: with_suffix(user['reputation']),
+      reputation: user['reputation'].with_suffix,
       badge_counts: badge_counts,
       image: profile_image,
       width: avatar_size
