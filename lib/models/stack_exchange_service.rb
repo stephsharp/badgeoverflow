@@ -12,9 +12,7 @@ class StackExchangeService
   # Fetches 1 or more of a given resource.
   #
   # When the request completes, the 'items' key of the response is
-  # yielded to the block. If there are multiple results, an array
-  # will be yielded, otherwise just the first element of the
-  # 'items' array.
+  # yielded to the block.
   #
   # Params:
   # +primary_resource+::
@@ -26,7 +24,7 @@ class StackExchangeService
   #   string, except for the special param +:ids+ which is an
   #   array of ids passed into the URL path
   #
-  def fetch(primary_resource, secondary_resource = nil, params = {}) # :yields: item_or_items
+  def fetch(primary_resource, secondary_resource = nil, params = {}) # :yields: items
     if secondary_resource.kind_of? Hash
       params = secondary_resource
       secondary_resource = nil
@@ -60,13 +58,11 @@ class StackExchangeService
       end
     end
 
-    result = items.length == 1 ? items.first : items
-
     if block_given?
-      yield result
+      yield items
     end
 
-    result
+    items
   end
 
   private

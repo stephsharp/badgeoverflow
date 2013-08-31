@@ -4,9 +4,10 @@ avatar_size = 230
 service = StackExchangeService.new
 
 SCHEDULER.every '5m', :first_in => 0 do |job|
-  service.fetch 'users', ids: user_id do |user|
-    profile_image = user['profile_image']
+  service.fetch 'users', ids: user_id do |users|
+    user = users.first
 
+    profile_image = user['profile_image']
     if profile_image.include? 'gravatar.com'
       profile_image << "&size=#{avatar_size}"
     end

@@ -16,11 +16,6 @@ class FavoriteQuestion < Badge
       fetch_all_pages: true
     })
 
-    # If only 1 question is returned, it is a Hash, not an array of Hashes
-    if (!questions.is_a? Array)
-      questions = Array.new [questions]
-    end
-
     if (questions.length > 0)
       highest_favorites_question = questions.first
 
