@@ -1,10 +1,23 @@
 class Badge
+  include Comparable
+  RANK_INDEX = { "bronze" => 0, "silver" => 1, "gold" => 2 }
+
   attr_reader :badge_id, :user_id, :name, :description, :rank, :award_count, :badge_type, :link
   attr_reader :series, :service
 
   def initialize(badge_json, user_id)
     @data = badge_json
     @user_id = user_id
+  end
+
+  def <=>(other_badge)
+    if other_badge.kind_of? Badge
+      RANK_INDEX[self.rank] <=> RANK_INDEX[other_badge.rank]
+    end
+  end
+
+  def ==(other_badge)
+    self.eql?(other_badge)
   end
 
   def progress_description

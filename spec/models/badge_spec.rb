@@ -129,6 +129,21 @@ describe Badge do
     end
   end
 
+  describe "<=>" do
+    bronze = Badge.new({"name" => "Badge", "rank" => "bronze"}, nil)
+    silver = Badge.new({"name" => "Badge", "rank" => "silver"}, nil)
+    gold   = Badge.new({"name" => "Badge", "rank" => "gold"}, nil)
+
+    specify { expect(bronze < silver).to be_true }
+    specify { expect(silver < gold).to be_true }
+    specify { expect(bronze < gold).to be_true }
+
+    it "compares identity with ==" do
+      bronze2 = Badge.new({"name" => "Badge", "rank" => "bronze"}, nil)
+      expect(bronze == bronze2).to be_false
+    end
+  end
+
   describe "#progress_description" do
     it "returns the badge's description" do
       badge.stub(:description) { "The Description" }
