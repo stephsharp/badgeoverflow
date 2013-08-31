@@ -1,7 +1,5 @@
 require_relative '../badge'
 
-# TODO: pluralize favourites in output string only if num != 1
-
 class FavoriteQuestion < Badge
   series :favorite_question
 
@@ -37,7 +35,10 @@ class FavoriteQuestion < Badge
       favorites = highest_favorites_question['favorite_count']
       remaining = required_favorites - favorites
 
-      "Your question \"#{title.truncate(70)}\" has #{favorites} favorites. #{remaining} favorites to go!"
+      favorites_str = "#{favorites} " + "favorite".pluralize(favorites, "favorites")
+      remaining_str = "#{remaining} " + "favorite".pluralize(remaining, "favorites")
+
+      "Your question \"#{title.truncate(70)}\" has #{favorites_str}. #{remaining_str} to go!"
     else
       "Question favorited by #{required_favorites} users. You have not asked any questions yet!"
     end
