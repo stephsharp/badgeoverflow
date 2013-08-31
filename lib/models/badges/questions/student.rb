@@ -1,4 +1,4 @@
-require_relative 'badge'
+require_relative '../badge'
 
 class Student < Badge
   # add callbacks here to return progress percentage, progress string,

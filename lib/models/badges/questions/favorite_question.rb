@@ -1,3 +1,5 @@
+require_relative '../badge'
+
 # TODO: pluralize favourites in output string only if num != 1
 
 class FavoriteQuestion < Badge

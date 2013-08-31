@@ -1,3 +1,5 @@
+require_relative '../badge'
+
 class NiceQuestion < Badge
   series :nice_question
 
