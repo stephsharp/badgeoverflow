@@ -1,5 +1,3 @@
-# TODO: Restrict question title length to n characters
-
 class NiceQuestion < Badge
   series :nice_question
 
@@ -20,7 +18,7 @@ class NiceQuestion < Badge
     score = question['score']
     remaining = required_score - score
 
-    "Your question \"#{title}\" has #{score} votes. #{remaining} votes to go!"
+    "Your question \"#{title.truncate(75)}\" has #{score} votes. #{remaining} votes to go!"
   end
 
   def required_score
