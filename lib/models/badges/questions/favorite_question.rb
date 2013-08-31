@@ -16,11 +16,11 @@ class FavoriteQuestion < Badge
       fetch_all_pages: true
     })
 
-    if (questions.length > 0)
+    if questions.length > 0
       highest_favorites_question = questions.first
 
       # Get badge with highest favorite_count
-      if (questions.length > 1)
+      if questions.length > 1
         highest_favorites_question = questions.reduce do |highest_favorites, question|
           question['favorite_count'] > highest_favorites['favorite_count'] ? question : highest_favorites
         end
