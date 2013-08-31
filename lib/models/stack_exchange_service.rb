@@ -42,6 +42,8 @@ class StackExchangeService
       response = get(primary_resource, secondary_resource, params.merge(page: page))
       body = JSON.parse(response.body)
 
+      handle_error_if_required(body)
+
       response_items = body['items']
       response_items ||= []
       items += response_items
@@ -79,6 +81,22 @@ class StackExchangeService
     final_params = default_params.merge(params)
 
     stack_exchange.get("#{path}?#{param_string(final_params)}")
+  end
+
+  def handle_error_if_required(response_body)
+    error_id = response_body['error_id']
+    if error_id
+      name = response_body['error_name']
+      message = response_body['error_message']
+
+      case name
+      when "throttle_violation"
+        seconds_remaining = message.gsub(/^.*?(\d+) seconds$/, '\1').to_i
+        raise "Throttle violation! This will be lifted at #{Time.new + seconds_remaining}."
+      else
+        raise "#{name} (#{error_id}): #{message}"
+      end
+    end
   end
 
   def stack_exchange
