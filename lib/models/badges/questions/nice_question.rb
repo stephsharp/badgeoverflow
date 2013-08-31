@@ -14,13 +14,16 @@ class NiceQuestion < Badge
       order: 'desc',
       pagesize: 1,
       fetch_all_pages: false
-    })
+    }).first
 
     title = question['title']
     score = question['score']
     remaining = required_score - score
 
-    "Your question \"#{title.truncate(75)}\" has #{score} votes. #{remaining} votes to go!"
+    score_str = "#{score} " + "vote".pluralize(score, "votes")
+    remaining_str = "#{remaining} " + "vote".pluralize(remaining, "votes")
+
+    "Your question \"#{title.truncate(75)}\" has #{score_str}. #{remaining_str} to go!"
   end
 
   def required_score
