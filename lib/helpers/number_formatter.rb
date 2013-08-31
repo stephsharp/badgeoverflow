@@ -4,7 +4,7 @@ module NumberFormatter
     if (self < 1000)
       self.to_s
     else
-      exp = (Math.log(count) / Math.log(1000)).to_i
+      exp = (Math.log(self) / Math.log(1000)).to_i
       "%.1f%c" % [(self.to_f / 1000 ** exp).round(1), suffix[exp-1]]
     end
   end
