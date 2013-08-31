@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'helpers/rank_colour'
 
 class Badge
   include RankColour

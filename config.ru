@@ -1,3 +1,4 @@
+$: << 'lib'
 require 'dashing'
 
 configure do
