@@ -34,13 +34,13 @@ class PopularQuestion < Badge
       views = highest_views_question['view_count']
       remaining = required_views - views
 
-      views_str = "#{views} " + "view".pluralize(views, "views")
-      remaining_str = "#{remaining} " + "view".pluralize(remaining, "views")
+      views_str = "#{views.with_commas} " + "view".pluralize(views, "views")
+      remaining_str = "#{remaining.with_commas} " + "view".pluralize(remaining, "views")
 
       #Asked a question with 1,000 views
       "Your question \"#{title.truncate(70)}\" has #{views_str}. #{remaining_str} to go!"
     else
-      "Asked a question with #{required_views} views. You have not asked any questions yet!"
+      "Asked a question with #{required_views.with_commas} views. You have not asked any questions yet!"
     end
   end
 
