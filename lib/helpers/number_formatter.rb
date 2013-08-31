@@ -10,7 +10,7 @@ module NumberFormatter
   end
 
   def with_commas
-    self.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
+    self.to_s.reverse.gsub(/...(?!-)(?=.)/,'\&,').reverse
   end
 end
 
