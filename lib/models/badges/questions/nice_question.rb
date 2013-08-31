@@ -24,10 +24,6 @@ class NiceQuestion < Badge
   def required_score
     10
   end
-
-  def service
-    @service ||= StackExchangeService.new('stackoverflow')
-  end
 end
 
 class GoodQuestion < NiceQuestion

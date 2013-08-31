@@ -1,5 +1,6 @@
 class Badge
-  attr_reader :badge_id, :user_id, :name, :description, :rank, :award_count, :badge_type, :link, :series
+  attr_reader :badge_id, :user_id, :name, :description, :rank, :award_count, :badge_type, :link
+  attr_reader :series, :service
 
   def initialize(badge_json, user_id)
     @data = badge_json
@@ -16,6 +17,10 @@ class Badge
 
   def series
     @series ||= @@series[self.class]
+  end
+
+  def service
+    @service ||= StackExchangeService.new('stackoverflow')
   end
 
   def badge_id;    @data['badge_id'];    end
