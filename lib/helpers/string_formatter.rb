@@ -22,6 +22,14 @@ module StringFormatter
     new_string << "..." if truncated
     new_string
   end
+
+  def pluralize(count, plural)
+    if (count == 1)
+      self
+    else
+      plural
+    end
+  end
 end
 
 class String
