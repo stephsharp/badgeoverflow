@@ -30,6 +30,10 @@ module StringFormatter
       plural
     end
   end
+
+  def link_to(url)
+    "<a href=\"#{url}\" target=\"_blank\">#{self}</a>"
+  end
 end
 
 class String
