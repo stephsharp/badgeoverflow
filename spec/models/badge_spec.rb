@@ -144,6 +144,54 @@ describe Badge do
     end
   end
 
+  describe "#first_badges_in_series" do
+    let(:bronze) { Badge.new({"name" => "Badge", "rank" => "bronze"}, nil) }
+    let(:silver) { Badge.new({"name" => "Badge", "rank" => "silver"}, nil) }
+    let(:gold)   { Badge.new({"name" => "Badge", "rank" => "gold"}, nil) }
+
+    let(:badges) { [bronze, silver, gold] }
+
+    context "with 3 badges from the same series" do
+      it "returns the bronze badge" do
+        bronze.stub(:series) { :test_series }
+        silver.stub(:series) { :test_series }
+        gold.stub(:series) { :test_series }
+
+        expect(Badge.first_badges_in_series(badges)).to eq [bronze]
+      end
+    end
+
+    context "with 3 badges from the different series" do
+      it "returns all the badges" do
+        bronze.stub(:series) { :first }
+        silver.stub(:series) { :second }
+        gold.stub(:series) { :third }
+
+        expect(Badge.first_badges_in_series(badges)).to eq [bronze, silver, gold]
+      end
+    end
+
+    context "with a bronze badge from one series and a silver & gold from another" do
+      it "returns the bronze and silver badges" do
+        bronze.stub(:series) { :bronze }
+        silver.stub(:series) { :silver }
+        gold.stub(:series) { :silver }
+
+        expect(Badge.first_badges_in_series(badges)).to eq [bronze, silver]
+      end
+    end
+
+    context "with three badges having no series" do
+      it "returns all the badges" do
+        bronze.stub(:series) { nil }
+        silver.stub(:series) { nil }
+        gold.stub(:series) { nil }
+
+        expect(Badge.first_badges_in_series(badges)).to eq [bronze, silver, gold]
+      end
+    end
+  end
+
   describe "#progress_description" do
     it "returns the badge's description" do
       badge.stub(:description) { "The Description" }

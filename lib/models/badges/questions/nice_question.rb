@@ -32,12 +32,16 @@ class NiceQuestion < Badge
 end
 
 class GoodQuestion < NiceQuestion
+  series :nice_question
+
   def required_score
     25
   end
 end
 
 class GreatQuestion < NiceQuestion
+  series :nice_question
+
   def required_score
     100
   end

@@ -33,30 +33,16 @@ class UnearnedBadgesJob
 
     named_badges.map! { |b| Badge.new(b, user_id) }
 
-    # get all badge ids the user has earned and store in array
     user_badges = service.fetch('users', 'badges', ids: user_id)
-    user_badge_ids = user_badges.map { |b| b['badge_id'] }
+    user_badges.map! { |b| Badge.new(b, user_id) }
 
-    # get unearned badge ids (in array 1, but not in array 2)
-    named_badge_ids = named_badges.map { |badge| badge.badge_id }
-    unearned_badge_ids = named_badge_ids - user_badge_ids
-
+    # get unearned badges
+    #
     # where there is a set of badges (bronze, silver, gold),
     # only keep lowest ranked unearned badge in array
+    unearned_badges = Badge.first_badges_in_series(named_badges - user_badges)
 
-
-
-    # choose badge at random from the array
-    random_badge_id = unearned_badge_ids.sample
-    random_badge = named_badges.find { |badge| badge.badge_id == random_badge_id }
-
-    # user.get_progress_toward_badge(Badge.new(random_badge)) do |progress|
-    #   send_event 'unearned_badges', progress.to_h
-    # end
-
-    # display name of badge, and what is required to earn the badge (description)
-    # personalise the description to what the user needs to earn the bagde?
-    # e.g. "You only need 4 more comments with score of 5 or more."
+    random_badge = unearned_badges.sample
 
     send_event('unearned_badges', { :title => random_badge.progress_title,
                                     :text => random_badge.name,

@@ -17,7 +17,14 @@ class Badge
   end
 
   def ==(other_badge)
-    self.eql?(other_badge)
+    self.badge_id == other_badge.badge_id &&
+    self.name == other_badge.name &&
+    self.rank == other_badge.rank &&
+    self.user_id == other_badge.user_id
+  end
+
+  def hash
+    self.badge_id.hash ^ self.name.hash ^ self.rank.hash ^ self.user_id.hash
   end
 
   def progress_description
@@ -60,6 +67,24 @@ class Badge
     def series(name)
       raise "series name must be a symbol" unless name.kind_of?(Symbol)
       @@series[self] = name
+    end
+
+    def first_badges_in_series(badge_array)
+      first_badges_in_series = badge_array.reduce({}) do |series, badge|
+        if badge.series
+          first = series[badge.series]
+          if !first || badge < first
+            series[badge.series] = badge
+          end
+        else
+          series[nil] ||= []
+          series[nil] << badge
+        end
+
+        series
+      end
+
+      first_badges_in_series.values.flatten
     end
 
     private
