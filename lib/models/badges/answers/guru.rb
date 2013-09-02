@@ -11,6 +11,7 @@ class Guru < Badge
       ids: user_id,
       sort: 'votes',
       order: 'desc',
+      filter: '!9cC8zqAGM',
       fetch_all_pages: true
     })
 
@@ -19,13 +20,14 @@ class Guru < Badge
     if highest_accepted_answer
       question = service.fetch('questions', ids: highest_accepted_answer['question_id']).first
       title = question['title']
+      link = highest_accepted_answer['link']
       score = highest_accepted_answer['score']
       remaining = required_score - score
 
       score_str = "#{score} " + "vote".pluralize(score, "votes")
       remaining_str = "#{remaining} " + "vote".pluralize(remaining, "votes")
 
-      "Your answer to question \"#{title.truncate(70)}\" has #{score_str}. #{remaining_str} to go!"
+      "Your answer to question \"#{title.truncate(70).link_to(link)}\" has #{score_str}. #{remaining_str} to go!"
     else
       "Accepted answer and score of #{required_votes} or more. You have not answered any questions yet!"
     end
