@@ -16,16 +16,12 @@ class FavoriteQuestion < Badge
       fetch_all_pages: true
     })
 
-    if questions.length > 0
-      highest_favorites_question = questions.first
+    # Get badge with highest favorite_count
+    highest_favorites_question = questions.reduce do |highest_favorites, question|
+      question['favorite_count'] > highest_favorites['favorite_count'] ? question : highest_favorites
+    end
 
-      # Get badge with highest favorite_count
-      if questions.length > 1
-        highest_favorites_question = questions.reduce do |highest_favorites, question|
-          question['favorite_count'] > highest_favorites['favorite_count'] ? question : highest_favorites
-        end
-      end
-
+    if highest_favorites_question
       title = highest_favorites_question['title']
       favorites = highest_favorites_question['favorite_count']
       remaining = required_favorites - favorites
