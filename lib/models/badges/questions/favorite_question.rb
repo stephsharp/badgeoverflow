@@ -23,13 +23,14 @@ class FavoriteQuestion < Badge
 
     if highest_favorites_question
       title = highest_favorites_question['title']
+      link = highest_favorites_question['link']
       favorites = highest_favorites_question['favorite_count']
       remaining = required_favorites - favorites
 
       favorites_str = "#{favorites} " + "favorite".pluralize(favorites, "favorites")
       remaining_str = "#{remaining} " + "favorite".pluralize(remaining, "favorites")
 
-      "Your question \"#{title.truncate(70)}\" has #{favorites_str}. #{remaining_str} to go!"
+      "Your question \"#{title.truncate(70).link_to(link)}\" has #{favorites_str}. #{remaining_str} to go!"
     else
       "Question favorited by #{required_favorites} users. You have not asked any questions yet!"
     end

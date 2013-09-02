@@ -22,13 +22,14 @@ class PopularQuestion < Badge
 
     if highest_views_question
       title = highest_views_question['title']
+      link = highest_views_question['link']
       views = highest_views_question['view_count']
       remaining = required_views - views
 
       views_str = "#{views.with_commas} " + "view".pluralize(views, "views")
       remaining_str = "#{remaining.with_commas} " + "view".pluralize(remaining, "views")
 
-      "Your question \"#{title.truncate(70)}\" has #{views_str}. #{remaining_str} to go!"
+      "Your question \"#{title.truncate(70).link_to(link)}\" has #{views_str}. #{remaining_str} to go!"
     else
       "Asked a question with #{required_views.with_commas} views. You have not asked any questions yet!"
     end

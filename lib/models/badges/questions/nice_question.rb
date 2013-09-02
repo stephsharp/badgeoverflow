@@ -17,13 +17,14 @@ class NiceQuestion < Badge
     }).first
 
     title = question['title']
+    link = question['link']
     score = question['score']
     remaining = required_score - score
 
     score_str = "#{score} " + "vote".pluralize(score, "votes")
     remaining_str = "#{remaining} " + "vote".pluralize(remaining, "votes")
 
-    "Your question \"#{title.truncate(75)}\" has #{score_str}. #{remaining_str} to go!"
+    "Your question \"#{title.truncate(75).link_to(link)}\" has #{score_str}. #{remaining_str} to go!"
   end
 
   def required_score
