@@ -15,16 +15,12 @@ class PopularQuestion < Badge
       fetch_all_pages: true
     })
 
-    if questions.length > 0
-      highest_views_question = questions.first
+    # Get badge with highest view_count
+    highest_views_question = questions.reduce do |highest_views, question|
+      question['view_count'] > highest_views['view_count'] ? question : highest_views
+    end
 
-      # Get badge with highest view_count
-      if questions.length > 1
-        highest_views_question = questions.reduce do |highest_views, question|
-          question['view_count'] > highest_views['view_count'] ? question : highest_views
-        end
-      end
-
+    if highest_views_question
       title = highest_views_question['title']
       views = highest_views_question['view_count']
       remaining = required_views - views
