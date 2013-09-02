@@ -34,16 +34,12 @@ class NiceAnswer < Badge
 end
 
 class GoodAnswer < NiceAnswer
-  series :nice_answer
-
   def required_score
     25
   end
 end
 
 class GreatAnswer < NiceAnswer
-  series :nice_answer
-
   def required_score
     100
   end

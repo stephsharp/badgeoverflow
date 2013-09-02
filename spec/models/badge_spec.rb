@@ -111,12 +111,19 @@ describe Badge do
   end
 
   describe "::series" do
-    it "defines the series on all instances" do
-      class BadgeInSeries < Badge
-        series :the_series
-      end
+    class BadgeInSeries < Badge
+      series :the_series
+    end
 
+    it "defines the series on all instances" do
       badge = BadgeInSeries.new('{"name":"Badge In Series"}', nil)
+      expect(badge.series).to eq :the_series
+    end
+
+    it "defines the series on subclasses" do
+      class BadgeSubclassInSeries < BadgeInSeries; end
+
+      badge = BadgeSubclassInSeries.new('{"name":"Badge Subclass In Series"}', nil)
       expect(badge.series).to eq :the_series
     end
 

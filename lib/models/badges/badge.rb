@@ -36,7 +36,7 @@ class Badge
   end
 
   def series
-    @series ||= @@series[self.class]
+    @@series
   end
 
   def service
@@ -66,7 +66,7 @@ class Badge
 
     def series(name)
       raise "series name must be a symbol" unless name.kind_of?(Symbol)
-      @@series[self] = name
+      @@series = name
     end
 
     def first_badges_in_series(badge_array)
