@@ -59,6 +59,9 @@ SCHEDULER.every '1h', :first_in => 0 do
   # Daniel Beauchamp: 208314
   # Edward Ocampo-Gooding: 95705
   # Jeff Atwood: 1
+  #
+  # Others:
+  # 1493368 (eligible for Reversal)
   user_id = 1367622
 
   UnearnedBadgesJob.run(user_id)
