@@ -22,11 +22,11 @@ class SelfLearner < Badge
     questions = []
 
     # {ids} can contain up to 100 semicolon delimited ids
-    if question_ids.length < 100
+    # if question_ids.length < 100
       questions = service.fetch('questions', ids: question_ids)
-    else
-      question_ids.each_slice(100) { |slice| questions += service.fetch('questions', ids: slice) }
-    end
+    # else
+    #   question_ids.each_slice(100) { |slice| questions += service.fetch('questions', ids: slice) }
+    # end
 
     answers.each do |answer|
       answer['question'] = questions.find { |question| question['question_id'] == answer['question_id'] }

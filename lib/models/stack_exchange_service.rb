@@ -71,12 +71,25 @@ class StackExchangeService
     ids = *params.delete(:ids)
 
     path = "/#{api_version}/#{primary_resource}/"
-    path << "#{ids.join(';')}/" unless ids.empty?
-    path << "#{secondary_resource}/" if secondary_resource
+    results = []
 
-    final_params = default_params.merge(params)
+    # {ids} can contain up to 100 semicolon delimited ids
+    if ids.length < 100
+      path << "#{ids.join(';')}/" unless ids.empty?
+      path << "#{secondary_resource}/" if secondary_resource
 
-    stack_exchange.get("#{path}?#{param_string(final_params)}")
+      final_params = default_params.merge(params)
+      results += stack_exchange.get("#{path}?#{param_string(final_params)}")
+    else
+      ids.each_slice(100) do |slice|
+        path << "#{slice.join(';')}/"
+        path << "#{secondary_resource}/" if secondary_resource
+
+        final_params = default_params.merge(params)
+        results += stack_exchange.get("#{path}?#{param_string(final_params)}")
+      end
+    end
+    results
   end
 
   def handle_error_if_required(response_body)
