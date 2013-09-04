@@ -52,7 +52,7 @@ class UnearnedBadgesJob
   end
 end
 
-SCHEDULER.every '1h', :first_in => 0 do
+SCHEDULER.every '1h', :first_in => '8m' do
   # Steph Sharp: 1367622
   # Adam Sharp: 1164143
   # David Underwood: 131066

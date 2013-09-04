@@ -10,7 +10,7 @@ require 'json'
 user_id = 131066
 
 # Get timeline for user - /users/{ids}/timeline 
-SCHEDULER.every '1h', :first_in => '1h' do |job|
+SCHEDULER.every '1h', :first_in => '6m' do |job|
   stack_exchange = Net::HTTP.new('api.stackexchange.com')
   recent_badges = []
   number_of_badges = 5

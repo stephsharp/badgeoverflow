@@ -14,7 +14,7 @@ end
 user_id = 131066
 
 # Get all badges for user - /users/{ids}/badges
-SCHEDULER.every '1h', :first_in => '1h' do |job|
+SCHEDULER.every '1h', :first_in => '4m' do |job|
   stack_exchange = Net::HTTP.new('api.stackexchange.com')
   badge_ids = []
   page_number = 1
