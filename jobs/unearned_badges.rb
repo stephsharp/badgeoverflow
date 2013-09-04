@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'yaml'
 require 'helpers/rank_colour'
 
 class Badge
@@ -53,16 +54,11 @@ class UnearnedBadgesJob
 end
 
 SCHEDULER.every '1h', :first_in => '8m' do
-  # Steph Sharp: 1367622
-  # Adam Sharp: 1164143
-  # David Underwood: 131066
-  # Daniel Beauchamp: 208314
-  # Edward Ocampo-Gooding: 95705
-  # Jeff Atwood: 1
-  #
-  # Others:
-  # 1493368 (eligible for Reversal)
-  user_id = 131066
+  users_config = YAML.load(File.read('config/users.yml'))
 
-  UnearnedBadgesJob.run(user_id)
+  user = users_config['users'].find do |user|
+    user['id'] == users_config['user_id']
+  end
+
+  UnearnedBadgesJob.run(user['id'])
 end
