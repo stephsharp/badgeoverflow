@@ -62,7 +62,7 @@ SCHEDULER.every '1h', :first_in => 0 do
   #
   # Others:
   # 1493368 (eligible for Reversal)
-  user_id = 1367622
+  user_id = 131066
 
   UnearnedBadgesJob.run(user_id)
 end

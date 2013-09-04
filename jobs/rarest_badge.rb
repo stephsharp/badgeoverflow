@@ -11,7 +11,7 @@ end
 # Daniel Beauchamp: 208314
 # Edward Ocampo-Gooding: 95705
 # Jeff Atwood: 1
-user_id = 1367622
+user_id = 131066
 
 # Get all badges for user - /users/{ids}/badges
 SCHEDULER.every '1h', :first_in => '1h' do |job|
