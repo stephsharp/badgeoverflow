@@ -17,9 +17,19 @@ class SelfLearner < Badge
     })
 
     # Get all questions related to those answers (question_id)
+    question_ids = answers.map { |answer| answer['question_id'] }
+
+    questions = []
+
+    # {ids} can contain up to 100 semicolon delimited ids
+    if question_ids.length < 100
+      questions = service.fetch('questions', ids: question_ids)
+    else
+      question_ids.each_slice(100) { |slice| questions += service.fetch('questions', ids: slice) }
+    end
+
     answers.each do |answer|
-      question = service.fetch('questions', ids: answer['question_id']).first
-      answer['question'] = question
+      answer['question'] = questions.find { |question| question['question_id'] == answer['question_id'] }
     end
 
     # Make array of answers to your own questions (where question owner user_id == self.user_id)
@@ -37,9 +47,9 @@ class SelfLearner < Badge
       score_str = "#{score} " + "vote".pluralize(score, "votes")
       remaining_str = "#{remaining} " + "vote".pluralize(remaining, "votes")
 
-      "Your answer to your own question \"#{title.truncate(65).link_to(link)}\" has #{score_str}. #{remaining_str} to go!"
+      "Your answer to your own question \"#{title.truncate(55).link_to(link)}\" has #{score_str}. #{remaining_str} to go!"
     else
-      "Answered your own question with score of #{required_votes} or more. You have not answered any of your own questions yet!"
+      "Answered your own question with score of #{required_score} or more. You have not answered any of your own questions yet!"
     end
   end
 
