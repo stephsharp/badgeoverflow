@@ -1,4 +1,6 @@
-user_id = 131066
+require 'badge_overflow_config'
+
+user_id = BadgeOverflowConfig.user_id
 avatar_size = 230
 
 service = StackExchangeService.new

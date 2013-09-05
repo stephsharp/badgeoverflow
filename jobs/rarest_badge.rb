@@ -1,17 +1,13 @@
 require 'net/http'
 require 'json'
 
+require 'badge_overflow_config'
+
 class Badge
   include RankColour
 end
 
-# Steph Sharp: 1367622 
-# Adam Sharp: 1164143
-# David Underwood: 131066
-# Daniel Beauchamp: 208314
-# Edward Ocampo-Gooding: 95705
-# Jeff Atwood: 1
-user_id = 131066
+user_id = BadgeOverflowConfig.user_id
 
 # Get all badges for user - /users/{ids}/badges
 SCHEDULER.every '1h', :first_in => '4m' do |job|

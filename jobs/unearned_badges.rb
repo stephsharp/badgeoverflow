@@ -1,6 +1,8 @@
 require 'net/http'
 require 'json'
 require 'yaml'
+
+require 'badge_overflow_config'
 require 'helpers/rank_colour'
 
 class Badge
@@ -54,11 +56,5 @@ class UnearnedBadgesJob
 end
 
 SCHEDULER.every '1h', :first_in => '8m' do
-  users_config = YAML.load(File.read('config/users.yml'))
-
-  user = users_config['users'].find do |user|
-    user['id'] == users_config['user_id']
-  end
-
-  UnearnedBadgesJob.run(user['id'])
+  UnearnedBadgesJob.run(BadgeOverflowConfig.user_id)
 end

@@ -1,13 +1,9 @@
 require 'net/http'
 require 'json'
 
-# Steph Sharp: 1367622 
-# Adam Sharp: 1164143
-# David Underwood: 131066
-# Daniel Beauchamp: 208314
-# Edward Ocampo-Gooding: 95705
-# Jeff Atwood: 1
-user_id = 131066
+require 'badge_overflow_config'
+
+user_id = BadgeOverflowConfig.user_id
 
 # Get timeline for user - /users/{ids}/timeline 
 SCHEDULER.every '1h', :first_in => '2m' do |job|
