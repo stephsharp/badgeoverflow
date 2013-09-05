@@ -16,7 +16,7 @@ class Badge
     end
   end
 
-  def ==(other_badge)
+  def eql?(other_badge)
     self.badge_id == other_badge.badge_id &&
     self.name == other_badge.name &&
     self.rank == other_badge.rank &&
