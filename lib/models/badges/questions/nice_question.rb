@@ -1,7 +1,9 @@
 require_relative '../badge'
 
 class NiceQuestion < Badge
-  series :nice_question
+  def series
+    :nice_question
+  end
 
   def progress_title
     "You're getting close to..."

@@ -35,10 +35,6 @@ class Badge
     "Have you considered..."
   end
 
-  def series
-    @@series
-  end
-
   def service
     @service ||= StackExchangeService.new('stackoverflow')
   end
@@ -62,11 +58,6 @@ class Badge
       else
         orig_new(badge_json, *args)
       end
-    end
-
-    def series(name)
-      raise "series name must be a symbol" unless name.kind_of?(Symbol)
-      @@series = name
     end
 
     def first_badges_in_series(badge_array)
@@ -109,6 +100,4 @@ class Badge
       badge_name.split(/[\W]/).map(&:capitalize).join
     end
   end
-
-  @@series = {}
 end

@@ -1,7 +1,9 @@
 require_relative '../badge'
 
 class Tenacious < Badge
-  series :tenacious
+  def series
+    :tenacious
+  end
 
   def progress_title
     "You're getting close to..."

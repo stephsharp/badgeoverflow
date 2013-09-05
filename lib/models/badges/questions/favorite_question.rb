@@ -1,7 +1,9 @@
 require_relative '../badge'
 
 class FavoriteQuestion < Badge
-  series :favorite_question
+  def series
+    :favorite_question
+  end
 
   def progress_title
     "You're getting close to..."
