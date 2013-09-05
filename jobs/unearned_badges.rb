@@ -55,6 +55,6 @@ class UnearnedBadgesJob
   end
 end
 
-SCHEDULER.every '1h', :first_in => '8m' do
+SCHEDULER.every '10m', :first_in => 0 do
   UnearnedBadgesJob.run(BadgeOverflowConfig.user_id)
 end
