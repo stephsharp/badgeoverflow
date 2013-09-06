@@ -1,0 +1,3 @@
+[submodule "badgeoverflow-core"]
+	path = badgeoverflow-core
+	url = git@github.com:sharplet/badgeoverflow-core.git

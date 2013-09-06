@@ -1,3 +1,8 @@
+PATH
+  remote: badgeoverflow-core
+  specs:
+    badgeoverflow-core (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -74,6 +79,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  badgeoverflow-core!
   dashing
   rspec
   webmock
