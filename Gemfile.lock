@@ -2,6 +2,7 @@ PATH
   remote: badgeoverflow-core
   specs:
     badgeoverflow-core (0.0.1)
+      sanitize (~> 2.0.6)
 
 GEM
   remote: https://rubygems.org/
@@ -30,7 +31,10 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.3)
+    mini_portile (0.5.1)
     multi_json (1.7.7)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -47,6 +51,8 @@ GEM
     rufus-scheduler (2.0.23)
       tzinfo (>= 0.3.23)
     safe_yaml (0.9.4)
+    sanitize (2.0.6)
+      nokogiri (>= 1.4.4)
     sass (3.2.10)
     sinatra (1.4.3)
       rack (~> 1.4)
