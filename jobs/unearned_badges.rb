@@ -2,8 +2,8 @@ require 'net/http'
 require 'json'
 require 'yaml'
 
-require 'badge_overflow_config'
-require 'helpers/rank_colour'
+require 'badgeoverflow/core'
+require 'badgeoverflow/helpers'
 
 class Badge
   include RankColour

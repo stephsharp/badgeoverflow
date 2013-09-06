@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 
-require 'badge_overflow_config'
+require 'badgeoverflow/core'
 
 user_id = BadgeOverflowConfig.user_id
 
