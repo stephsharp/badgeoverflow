@@ -5,7 +5,7 @@ avatar_size = 230
 
 service = StackExchangeService.new
 
-SCHEDULER.every '5m', :first_in => 0 do |job|
+SCHEDULER.every '1h', :first_in => 0 do |job|
   service.fetch 'users', ids: user_id do |users|
     user = users.first
 
