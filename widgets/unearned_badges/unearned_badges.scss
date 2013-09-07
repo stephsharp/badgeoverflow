@@ -1,8 +1,9 @@
 // ----------------------------------------------------------------------------
 // Sass declarations
 // ----------------------------------------------------------------------------
-$background-color:  #808080;
+@import url(http://fonts.googleapis.com/css?family=Cabin:400,500,600,700);
 
+$background-color:  #808080;
 $title-color:       rgba(255, 255, 255, 0.7);
 $subheading-color:  rgba(255, 255, 255, 0.9);
 
@@ -13,9 +14,11 @@ $subheading-color:  rgba(255, 255, 255, 0.9);
 
   background-color: $background-color;
   vertical-align: top !important;
+  font-family: 'Cabin', "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   .title {
     color: $title-color;
+    font-weight: 500;
     padding-bottom: 45px;
   }
 
