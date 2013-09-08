@@ -4,10 +4,19 @@ An exceptionally handsome way to track your Stack Overflow badges.
 
 Created by [Adam](https://github.com/sharplet) & [Stephanie Sharp](https://github.com/stephsharp).
 
+
 ## Overview
 
-A [Dashing](http://shopify.github.com/dashing) dashboard that 
-displays a range of stats about a [Stack Overflow](http://stackoverflow.com) user’s badges.
+Badge Overflow is a [Dashing](http://shopify.github.com/dashing)
+dashboard that displays a range of stats about a
+[Stack Overflow](http://stackoverflow.com) user's badges.
+
+You can view the demo dashboard at [badgeoverflow.heroku.com](http://badgeoverflow.heroku.com/).
+
+![Steph's dashboard](https://raw.github.com/stephsharp/badgeoverflow/master/public/screenshots/badgeoverflow/steph_sharp.png)
+
+![Adam's dashboard](https://raw.github.com/stephsharp/badgeoverflow/master/public/screenshots/badgeoverflow/adam_sharp.png)
+
 
 ## Widgets
 
@@ -21,23 +30,29 @@ Displays the rarest badge the user has been awarded, and the number of times thi
 Displays a list of the user's 5 most recently awarded badges and their rank (bronze, siler, or gold).
 
 ### Unearned Badges
-This widget tracks the progress toward unearned badges. It randomly selects a badge you haven't earned and shows your progress, or suggests things you could try in order to earn the badge. The widget's background colour dynamically changes depending on the badge's rank (bronze, silver, or gold). For badges where we aren't (yet) calculating progress, we display the badge's description.
+Tracks the user's progress toward unearned badges. It randomly selects a badge you haven't earned and shows your progress, or suggests things you could try in order to earn the badge. The widget's background colour dynamically changes depending on the badge's rank (bronze, silver, or gold). For badges where progress isn't calculated (yet), it displays the badge's description.
 
 ### User
-This widget displays the Stack Overflow users's avatar, name, reputation and number of badges the user has been awarded. The avatar image and user's name are linked to the user's Stack Overflow profile webpage.
+Displays the user's avatar, name, reputation and the number of badges they have been awarded. The avatar image and user's name are linked to the user's Stack Overflow profile webpage.
 
-
-## Demo
-
-You can view the demo dashboard at [http://badgeoverflow.heroku.com/](http://badgeoverflow.heroku.com/).
-
-![Steph's dashboard](https://raw.github.com/stephsharp/badgeoverflow/master/public/screenshots/badgeoverflow/steph_sharp.png)
-
-![Adam's dashboard](https://raw.github.com/stephsharp/badgeoverflow/master/public/screenshots/badgeoverflow/adam_sharp.png)
 
 ## Setup
 
-1. Edit the file `config/badgeoverflow.yml` and set the user ID you want to track progress for:
+Badge Overflow requires Ruby 1.9. To install:
+
+ 1. Get the code:
+
+    ```
+    $ git clone https://github.com/stephsharp/badgeoverflow.git
+    ```
+
+ 2. Install the required gems using Bundler:
+
+    ```
+    $ cd badgeoverflow && bundle install
+    ```
+
+ 3. Edit the file `config/badgeoverflow.yml` and set the user ID you want to track progress for:
 
     ```yaml
     user_id: YOUR_USER_ID
