@@ -28,6 +28,7 @@ SCHEDULER.every '10m', :first_in => 0 do
   unearned_badges = Badge.first_badges_in_series(named_badges - user_badges)
 
   random_badge = unearned_badges.sample
+  random_badge.calculate_progress!
 
   send_event('unearned_badges', { :title => random_badge.progress_title,
                                   :text => random_badge.name,
