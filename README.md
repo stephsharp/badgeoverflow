@@ -43,7 +43,7 @@ Badge Overflow requires Ruby 1.9. To install:
  1. Get the code:
 
     ```
-    $ git clone https://github.com/stephsharp/badgeoverflow.git
+    $ git clone https://github.com/stephsharp/badgeoverflow.git --recursive
     ```
 
  2. Install the required gems using Bundler:
