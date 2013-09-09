@@ -32,7 +32,7 @@ Displays a list of the user's 5 most recently awarded badges and their rank (bro
 ### Unearned Badges
 Tracks the user's progress toward unearned badges. It randomly selects a badge you haven't earned and shows your progress, or suggests things you could try in order to earn the badge. The widget's background colour dynamically changes depending on the badge's rank (bronze, silver, or gold). For badges where progress isn't calculated (yet), it displays the badge's description.
 
-### User
+### User Profile
 Displays the user's avatar, name, reputation and the number of badges they have been awarded. The avatar image and user's name are linked to the user's Stack Overflow profile webpage.
 
 
