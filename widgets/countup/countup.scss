@@ -36,16 +36,16 @@ $p-color:           rgba(255, 255, 255, 0.9);
 
     .title {
       color: $title-color;
-      padding-bottom: 25px;
+      padding-bottom: 30px;
     }
 
     h3 {
 
       font-size: 40px;
-      padding-bottom: 25px;
+      padding-bottom: 32px;
 
       .number {
-        font-size: 90px;
+        font-size: 80px;
         font-weight: 500;
       }
 
@@ -54,7 +54,7 @@ $p-color:           rgba(255, 255, 255, 0.9);
     p {
       color: $p-color;
       font-weight: 500;
-      font-size: 40px;
+      font-size: 32px;
     }
 
   }
