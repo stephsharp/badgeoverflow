@@ -3,7 +3,7 @@ require 'json'
 
 require 'badgeoverflow/core'
 
-class Badge
+class StackOverflow::Badge
   include RankColour
 end
 
@@ -57,7 +57,7 @@ SCHEDULER.every '1h', :first_in => '2m' do |job|
       break unless badges_response['has_more']
     end  
 
-    rarest_badge = Badge.new(rarest_badge, user_id)
+    rarest_badge = StackOverflow::Badge.new(rarest_badge, user_id)
 
     # Display badge name with award_count below
     formatted_award_count = rarest_badge.award_count.with_suffix
