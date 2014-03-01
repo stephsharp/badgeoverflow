@@ -15,6 +15,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
     end
 
     badge_counts = user['badge_counts'].map { |r,c| { rank: r, count: c } }
+    badge_counts.reverse!
 
     send_event 'user', {
       name: user['display_name'],
