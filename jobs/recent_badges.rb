@@ -4,6 +4,7 @@ require 'json'
 require 'badgeoverflow/core'
 
 user_id = BadgeOverflowConfig.user_id
+site = BadgeOverflowConfig.site || 'stackoverflow'
 
 # Get timeline for user - /users/{ids}/timeline 
 SCHEDULER.every '1h', :first_in => '30s' do |job|
@@ -13,12 +14,12 @@ SCHEDULER.every '1h', :first_in => '30s' do |job|
   page_number = 1
   
   loop do
-    user_timeline_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/timeline?page=#{page_number}&pagesize=100&site=stackoverflow").body)
+    user_timeline_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/timeline?page=#{page_number}&pagesize=100&site=#{site}").body)
 
     # Get badges in timeline
     user_timeline_response['items'].each do |item|
       if item['timeline_type'] == "badge" && recent_badges.length < number_of_badges
-        badge_response = JSON.parse(stack_exchange.get("/2.1/badges/#{item['badge_id']}?site=stackoverflow").body)
+        badge_response = JSON.parse(stack_exchange.get("/2.1/badges/#{item['badge_id']}?site=#{site}").body)
         badge_rank = badge_response['items'].first['rank']
         recent_badges << { rank: badge_rank, label: item['detail'] }
 

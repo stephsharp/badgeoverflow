@@ -8,6 +8,7 @@ class StackOverflow::Badge
 end
 
 user_id = BadgeOverflowConfig.user_id
+site = BadgeOverflowConfig.site || 'stackoverflow'
 
 # Get all badges for user - /users/{ids}/badges
 SCHEDULER.every '1h', :first_in => '20s' do |job|
@@ -16,7 +17,7 @@ SCHEDULER.every '1h', :first_in => '20s' do |job|
   page_number = 1
   
   loop do
-    user_badges_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/badges?page=#{page_number}&pagesize=30&site=stackoverflow").body)
+    user_badges_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/badges?page=#{page_number}&pagesize=30&site=#{site}").body)
     
     # Create array of badge ids
     badge_ids << user_badges_response['items'].map { |badge| badge['badge_id'] }
@@ -39,7 +40,7 @@ SCHEDULER.every '1h', :first_in => '20s' do |job|
     
     loop do
       # Get all badges with ids - /badges/{ids} 
-      badges_response = JSON.parse(stack_exchange.get("/2.1/badges/#{badge_ids.join(';')}?page=#{page_number}&pagesize=30&site=stackoverflow").body)
+      badges_response = JSON.parse(stack_exchange.get("/2.1/badges/#{badge_ids.join(';')}?page=#{page_number}&pagesize=30&site=#{site}").body)
 
       # Get badge with lowest award_count
       rarest_badge = badges_response['items'].reduce do |rarest, badge|

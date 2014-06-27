@@ -1,9 +1,8 @@
 require 'badgeoverflow/core'
 
+service = StackExchangeService.new
 user_id = BadgeOverflowConfig.user_id
 avatar_size = 230
-
-service = StackExchangeService.new
 
 SCHEDULER.every '1h', :first_in => 0 do |job|
   service.fetch 'users', ids: user_id do |users|
