@@ -3,24 +3,28 @@ require 'json'
 
 require 'badgeoverflow/core'
 
+service = StackExchangeService.new
 user_id = BadgeOverflowConfig.user_id
-site = BadgeOverflowConfig.site || 'stackoverflow'
 
 # Get timeline for user - /users/{ids}/timeline 
-SCHEDULER.every '1h', :first_in => '90s' do |job|
-  stack_exchange = Net::HTTP.new('api.stackexchange.com')
+SCHEDULER.every '1h', :first_in => '90s' do
   recent_badges = []
   number_of_badges = 5
   page_number = 1
   
   loop do
-    user_timeline_response = JSON.parse(stack_exchange.get("/2.2/users/#{user_id}/timeline?page=#{page_number}&pagesize=100&site=#{site}").body)
+    user_timeline_response = service.fetch 'users', 'timeline', {
+      ids: user_id,
+      page: page_number,
+      pagesize: 100,
+      fetch_all_pages: false
+    }
 
     # Get badges in timeline
-    user_timeline_response.fetch('items').each do |item|
+    user_timeline_response.each do |item|
       if item['timeline_type'] == "badge" && recent_badges.length < number_of_badges
-        badge_response = JSON.parse(stack_exchange.get("/2.2/badges/#{item['badge_id']}?site=#{site}").body)
-        badge_rank = badge_response.fetch('items').first['rank']
+        badge_response = service.fetch 'badges', ids: item['badge_id']
+        badge_rank = badge_response.first['rank']
         recent_badges << { rank: badge_rank, label: item['detail'] }
 
         backoff = badge_response['backoff']
@@ -31,11 +35,6 @@ SCHEDULER.every '1h', :first_in => '90s' do |job|
     end
 
     page_number += 1
-    backoff = user_timeline_response['backoff']
-
-    if backoff
-      sleep backoff
-    end
 
     # break loop unless there are more pages to search and not enough badges have been found
     break unless (user_timeline_response['has_more'] && recent_badges.length < number_of_badges)
