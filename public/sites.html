@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+
+<style>
+  body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 16px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: bold;
+  }
+
+  th, td {
+    padding: 4px;
+  }
+
+  .api_site_parameter {
+    font-family: monospace;
+  }
+
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+  $.ajax({
+    type: "GET",
+    url: "http://api.stackexchange.com/2.2/sites",
+    data: { pagesize: 1000, filter: "!SlEEHdila3.rI)gCt4" },
+    dataType: "json"
+  })
+  .done(function( data ) { 
+    var $table = $('<table />');
+    $table.append('<tr><th></th><th>Site name</th><th>API site parameter</th></tr>');
+    $.each(data['items'], function(index, value) {
+      $table.append('<tr><td><img src="' + value.icon_url + '" style="width: 50px;" /></td>' +
+                    '<td>' + value.name + '</td>' +
+                    '<td class="api_site_parameter">' + value.api_site_parameter + '</td></tr>');
+    });
+    $('body').append($table);
+  })
+ .fail(function( data ) {
+   $("body").append( "Failed to load sites.");
+ });
+</script>
+</head>
+<body>
+</body>
+</html>
+
+
