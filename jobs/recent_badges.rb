@@ -21,6 +21,11 @@ SCHEDULER.every '1h', :first_in => '30s' do |job|
         badge_response = JSON.parse(stack_exchange.get("/2.1/badges/#{item['badge_id']}?site=stackoverflow").body)
         badge_rank = badge_response['items'].first['rank']
         recent_badges << { rank: badge_rank, label: item['detail'] }
+
+        backoff = badge_response['backoff']
+        if backoff
+          sleep backoff
+        end
       end
     end
   
