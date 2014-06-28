@@ -11,7 +11,7 @@ user_id = BadgeOverflowConfig.user_id
 site = BadgeOverflowConfig.site || 'stackoverflow'
 
 # Get all badges for user - /users/{ids}/badges
-SCHEDULER.every '1h', :first_in => '20s' do |job|
+SCHEDULER.every '1h', :first_in => '40s' do |job|
   stack_exchange = Net::HTTP.new('api.stackexchange.com')
   badge_ids = []
   page_number = 1

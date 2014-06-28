@@ -7,7 +7,7 @@ user_id = BadgeOverflowConfig.user_id
 site = BadgeOverflowConfig.site || 'stackoverflow'
 
 # Get timeline for user - /users/{ids}/timeline 
-SCHEDULER.every '1h', :first_in => '10s' do |job|
+SCHEDULER.every '1h', :first_in => '20s' do |job|
   stack_exchange = Net::HTTP.new('api.stackexchange.com')
   last_badge = nil;
   page_number = 1
