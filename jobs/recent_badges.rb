@@ -17,10 +17,10 @@ SCHEDULER.every '1h', :first_in => '30s' do |job|
     user_timeline_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/timeline?page=#{page_number}&pagesize=100&site=#{site}").body)
 
     # Get badges in timeline
-    user_timeline_response['items'].each do |item|
+    user_timeline_response.fetch('items').each do |item|
       if item['timeline_type'] == "badge" && recent_badges.length < number_of_badges
         badge_response = JSON.parse(stack_exchange.get("/2.1/badges/#{item['badge_id']}?site=#{site}").body)
-        badge_rank = badge_response['items'].first['rank']
+        badge_rank = badge_response.fetch('items').first['rank']
         recent_badges << { rank: badge_rank, label: item['detail'] }
 
         backoff = badge_response['backoff']
@@ -29,10 +29,10 @@ SCHEDULER.every '1h', :first_in => '30s' do |job|
         end
       end
     end
-  
+
     page_number += 1
     backoff = user_timeline_response['backoff']
-    
+
     if backoff
       sleep backoff
     end
