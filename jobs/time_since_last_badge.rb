@@ -13,7 +13,7 @@ SCHEDULER.every '1h', :first_in => '10s' do |job|
   page_number = 1
   
   loop do
-    user_timeline_response = JSON.parse(stack_exchange.get("/2.1/users/#{user_id}/timeline?page=#{page_number}&pagesize=100&site=#{site}").body)
+    user_timeline_response = JSON.parse(stack_exchange.get("/2.2/users/#{user_id}/timeline?page=#{page_number}&pagesize=100&site=#{site}").body)
 
     # Get first badge in timeline
     last_badge = user_timeline_response['items'].find do |item|
