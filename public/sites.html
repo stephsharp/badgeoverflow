@@ -6,7 +6,7 @@
 <style>
   body {
     font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   th {
@@ -15,7 +15,11 @@
   }
 
   th, td {
-    padding: 4px;
+    padding: 2px;
+  }
+
+  img {
+    width: 42px;
   }
 
   .api_site_parameter {
@@ -36,7 +40,7 @@
     var $table = $('<table />');
     $table.append('<tr><th></th><th>Site name</th><th>API site parameter</th></tr>');
     $.each(data['items'], function(index, value) {
-      $table.append('<tr><td><img src="' + value.icon_url + '" style="width: 50px;" /></td>' +
+      $table.append('<tr><td><img src="' + value.icon_url + '" /></td>' +
                     '<td>' + value.name + '</td>' +
                     '<td class="api_site_parameter">' + value.api_site_parameter + '</td></tr>');
     });
