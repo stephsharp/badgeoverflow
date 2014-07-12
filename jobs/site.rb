@@ -3,8 +3,7 @@ require 'cgi'
 
 service = StackExchangeService.new
 
-# filter '!SmOhH*oSkO4VKR5084' (not working): high_resolution_icon_url, api_site_parameter, name
-# filter '!SmOhH.Dupn)h3uctFd': high_resolution_icon_url, icon_url, api_site_parameter, name
+# filter: high_resolution_icon_url, icon_url, api_site_parameter, name
 service.fetch 'sites', {
   filter: '!SmOhH.Dupn)h3uctFd',
   fetch_all_pages: true
@@ -13,8 +12,11 @@ service.fetch 'sites', {
     site['api_site_parameter'] == service.site
   }
 
+  # high_resolution_icon_url may be absent
+  icon_url = site['high_resolution_icon_url'] || site['icon_url']
+
   send_event 'site', {
     name: CGI.unescapeHTML(site['name']),
-    icon: site['high_resolution_icon_url']
+    icon: icon_url
   }
 end
