@@ -24,4 +24,8 @@ $text-color:        #2D2D2D;
     margin: 0;
   }
 
+  #bigtext {
+    font-size: 10px; // initial font size must be small for bigtext to work
+  }
+
 }

@@ -2,6 +2,10 @@ class Dashing.Site extends Dashing.Widget
 
   ready: ->
     # This is fired when the widget is done being rendered
+    $('#bigtext').bigtext({
+      minfontsize: 24,
+      maxfontsize: 32
+    })
 
   onData: (data) ->
     # Handle incoming data
