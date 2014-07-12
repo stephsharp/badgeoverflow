@@ -21,3 +21,8 @@ users:
 
 # user_id: 21878
 # site: stackapps
+
+# longest site name
+# site: meta.sqa
+# shortest site name
+# site: tor
