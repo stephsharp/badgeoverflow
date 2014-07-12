@@ -1,4 +1,5 @@
 require 'badgeoverflow/core'
+require 'cgi'
 
 service = StackExchangeService.new
 
@@ -13,7 +14,7 @@ service.fetch 'sites', {
   }
 
   send_event 'site', {
-    name: site['name'],
+    name: CGI.unescapeHTML(site['name']),
     icon: site['high_resolution_icon_url']
   }
 end
