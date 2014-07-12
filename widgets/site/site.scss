@@ -1,0 +1,31 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #ffffff;
+$text-color:        #2D2D2D;
+
+// ----------------------------------------------------------------------------
+// Widget-site styles
+// ----------------------------------------------------------------------------
+.widget-site {
+
+  background-color: $background-color;
+  color: $text-color;
+  text-align: center;
+  font-family: "Cabin", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  img {
+    vertical-align: middle;
+    width: 98%;
+    margin-top: -20px;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  #bigtext {
+    font-size: 10px; // initial font size must be small for bigtext to work
+  }
+
+}
