@@ -1,8 +1,8 @@
+api_key: ydqDod0rwEa)tCuev4kH2w((
+
 user_id: 1367622
 
-# user_id: 21878
-# site: stackapps
-
+# stackoverflow users
 users:
   - id: 1164143
     name: Adam Sharp
@@ -19,4 +19,5 @@ users:
   - id: 1493368
     name: (Eligible for Reversal)
 
-api_key: ydqDod0rwEa)tCuev4kH2w((
+# user_id: 21878
+# site: stackapps
