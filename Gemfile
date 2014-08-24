@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-ruby_version = File.read('.ruby-version').split('-').first
-ruby "#{ruby_version}"
+ruby '2.0.0'
 
 gem 'dashing'
 gem 'badgeoverflow-core', :path => 'badgeoverflow-core'
